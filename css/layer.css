@@ -1,0 +1,4 @@
+/* Minimal style placeholder to prevent 404 for layer.css */
+.layui-layer {
+    box-sizing: border-box;
+}

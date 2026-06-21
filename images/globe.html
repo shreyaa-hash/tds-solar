@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>The page does not exist-404</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link type="text/css" rel='stylesheet' href="/Public/ErrorTpl/css/404life.css">
+
+
+
+</head>
+
+<body translate="no" style="visibility:hidden;background:#fff;">
+    <div class="wrapper">
+        <h1>404</h1>
+        <p>Sorry, the page you visited does not exist or has been deleted</p>
+        <div class="buttons"><a href="/"> Return to the top page</a><br /><span id="domain"></span></div>
+    </div>
+    <div class="space">
+        <div class="blackhole"></div>
+        <div class="ship"></div>
+    </div>
+    <script>
+        var x = document.getElementById('domain');
+        x.innerHTML = "© " + document.domain;
+        window.location.href = '/';
+        //   setTimeout(function(){
+        //   },100)
+    </script>
+</body>
+
+</html>
