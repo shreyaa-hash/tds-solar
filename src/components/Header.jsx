@@ -9,6 +9,10 @@ export default function Header() {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  
+  // 🟢 State to track if products subcategories are expanded on mobile
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
+  
   const location = useLocation();
   const navigate = useNavigate();
   const timeoutRef = useRef(null);
@@ -65,6 +69,7 @@ export default function Header() {
     setIsOpen(false);
     setActiveDropdown(null);
     setShowSearch(false);
+    setMobileProductsOpen(false); // Reset on route change
   }, [location]);
 
   const navLinks = [
@@ -81,7 +86,7 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 h-14 flex items-center ${
         isScrolled || isOpen
-          ? 'bg-white/80 dark:bg-zinc-950/80 border-b border-slate-200/60 dark:border-white/10 backdrop-blur-md shadow-sm'
+          ? 'bg-white/95 dark:bg-zinc-950/95 border-b border-slate-200/60 dark:border-white/10 backdrop-blur-md shadow-sm'
           : 'bg-transparent border-b border-transparent'
       }`}
     >
@@ -136,7 +141,7 @@ export default function Header() {
                 </Link>
               )}
 
-              {/* Desktop Product Dropdown */}
+              {/* Desktop Dropdown */}
               {link.dropdown && activeDropdown === 'products' && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-72 bg-white dark:bg-neutral-950 border border-slate-200 dark:border-white/10 rounded-2xl shadow-2xl p-4 mt-2 flex flex-col space-y-1.5 z-50">
                   <div className="pb-2 border-b border-slate-100 dark:border-white/5 mb-1 pl-2 text-left">
@@ -205,61 +210,72 @@ export default function Header() {
         </div>
       )}
 
-      {/* 🟢 HYPER-PREMIUM APPLE STYLE MOBILE OVERLAY DRAWER */}
+      {/* 🟢 PREMIUM MOBILE MENU DRAWER (ACCORDING TOGGLE FIXED) */}
       {isOpen && (
-        <div className="fixed top-14 left-0 w-full h-[calc(100vh-3.5rem)] bg-white/95 dark:bg-zinc-950/95 z-40 px-6 py-6 flex flex-col justify-between overflow-y-auto lg:hidden border-t border-slate-200/50 dark:border-zinc-900/80 shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-300">
+        <div className="fixed top-14 left-0 w-full h-[calc(100vh-3.5rem)] bg-white dark:bg-zinc-950 z-40 px-6 py-6 flex flex-col justify-between overflow-y-auto lg:hidden border-t border-slate-100 dark:border-zinc-900/80 shadow-2xl transition-all duration-300">
           
-          {/* Menu Items Matrix */}
-          <div className="flex flex-col space-y-2 text-left">
+          <div className="flex flex-col space-y-1 text-left w-full">
             {navLinks.map((link) => (
-              <div key={link.name} className="w-full">
+              <div key={link.name} className="w-full py-1">
                 {link.dropdown ? (
-                  <div className="space-y-2">
-                    <div className="px-3 py-2 text-xs font-black tracking-widest text-sky-600 dark:text-sky-400 uppercase mt-2">
-                      {link.name}
-                    </div>
-                    {/* Compact Grid with Glassmorphism Cards */}
-                    <div className="grid grid-cols-2 gap-2.5 px-2">
-                      {categories.map((cat) => (
-                        <Link
-                          key={cat.id}
-                          to={`/products/${cat.id}`}
-                          onClick={() => setIsOpen(false)}
-                          className="flex flex-col justify-between p-3 rounded-xl bg-slate-50/70 dark:bg-white/[0.02] border border-slate-100 dark:border-white/[0.04] active:scale-98 transition-all group"
-                        >
-                          <span className="text-xs font-bold text-slate-800 dark:text-zinc-200 group-hover:text-sky-500">
-                            {cat.name}
-                          </span>
-                          <span className="text-[9px] font-medium text-slate-400 dark:text-zinc-500 mt-1 inline-flex items-center gap-0.5">
-                            Explore <ArrowRight className="w-2.5 h-2.5" />
-                          </span>
-                        </Link>
-                      ))}
-                    </div>
+                  <div className="w-full">
+                    {/* 🟢 Main Accordion Toggle Button for Products */}
+                    <button
+                      onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
+                      className={`flex items-center justify-between w-full px-4 py-3 rounded-xl text-base font-bold transition-all ${
+                        location.pathname.startsWith('/products')
+                          ? 'bg-sky-50 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400 font-black'
+                          : 'text-slate-800 dark:text-zinc-200 hover:bg-slate-50 dark:hover:bg-white/[0.02]'
+                      }`}
+                    >
+                      <span>{link.name}</span>
+                      <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${mobileProductsOpen ? 'rotate-180 text-sky-500' : 'opacity-50'}`} />
+                    </button>
+
+                    {/* 🟢 Sub-categories Grid opens ONLY when mobileProductsOpen is true */}
+                    {mobileProductsOpen && (
+                      <div className="grid grid-cols-2 gap-2.5 px-2 mt-2 transition-all duration-300 animate-in fade-in slide-in-from-top-2">
+                        {categories.map((cat) => (
+                          <Link
+                            key={cat.id}
+                            to={`/products/${cat.id}`}
+                            onClick={() => setIsOpen(false)}
+                            className="flex flex-col justify-between p-3 rounded-xl bg-slate-50/80 dark:bg-white/[0.02] border border-slate-100/50 dark:border-white/[0.03] active:scale-98 transition-all group"
+                          >
+                            <span className="text-xs font-bold text-slate-700 dark:text-zinc-300 group-hover:text-sky-500">
+                              {cat.name}
+                            </span>
+                            <span className="text-[10px] font-semibold text-sky-500/80 dark:text-sky-400/80 mt-1 inline-flex items-center gap-0.5">
+                              View Items <ArrowRight className="w-3 h-3" />
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <Link
                     to={link.path}
                     onClick={() => setIsOpen(false)}
-                    className={`flex items-center justify-between px-3 py-3 rounded-xl text-base font-bold transition-all active:bg-slate-50 dark:active:bg-white/[0.03] ${
+                    className={`flex items-center justify-between px-4 py-3 rounded-xl text-base font-bold transition-all ${
                       location.pathname === link.path
-                        ? 'bg-sky-50/50 text-sky-600 dark:bg-sky-500/10 dark:text-sky-400 font-black'
-                        : 'text-slate-800 dark:text-zinc-200'
+                        ? 'bg-sky-50 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400 font-black'
+                        : 'text-slate-800 dark:text-zinc-200 hover:bg-slate-50 dark:hover:bg-white/[0.02]'
                     }`}
                   >
                     <span>{link.name}</span>
-                    <ChevronDown className="w-4 h-4 -rotate-90 opacity-40" />
+                    <ArrowRight className="w-4 h-4 opacity-30" />
                   </Link>
                 )}
               </div>
             ))}
           </div>
 
-          {/* Premium Glassmorphic Bottom Control Bar */}
-          <div className="mt-8 p-4 rounded-2xl bg-slate-50/80 dark:bg-white/[0.02] border border-slate-100 dark:border-white/[0.05] flex items-center justify-between shadow-inner">
+          {/* Premium Bottom Utility Theme Dock */}
+          <div className="mt-auto p-4 rounded-2xl bg-slate-50/80 dark:bg-white/[0.02] border border-slate-100 dark:border-white/[0.05] flex items-center justify-between shadow-inner">
             <div className="flex flex-col text-left">
-              <span className="text-sm font-bold text-slate-800 dark:text-zinc-200">Interface Theme</span>
-              <span className="text-[10px] font-medium text-slate-400 dark:text-zinc-500">Toggle light or dark mode</span>
+              <span className="text-xs font-black text-slate-400 dark:text-zinc-500 uppercase tracking-widest">Interface Theme</span>
+              <span className="text-[11px] font-bold text-slate-700 dark:text-zinc-300 mt-0.5">Light / Dark Mode</span>
             </div>
             <button 
               onClick={toggleTheme} 
