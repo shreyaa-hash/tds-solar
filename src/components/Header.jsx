@@ -10,7 +10,7 @@ export default function Header() {
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   
-  // 🟢 State to track if products subcategories are expanded on mobile
+  // 🟢 Fixed: Controlled state for mobile toggle (By default strictly false)
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   
   const location = useLocation();
@@ -65,11 +65,12 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Sync states on path mutations
   useEffect(() => {
     setIsOpen(false);
     setActiveDropdown(null);
     setShowSearch(false);
-    setMobileProductsOpen(false); // Reset on route change
+    setMobileProductsOpen(false); 
   }, [location]);
 
   const navLinks = [
@@ -85,8 +86,8 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 h-14 flex items-center ${
-        isScrolled || isOpen
-          ? 'bg-white/95 dark:bg-zinc-950/95 border-b border-slate-200/60 dark:border-white/10 backdrop-blur-md shadow-sm'
+        isScrolled
+          ? 'bg-white dark:bg-zinc-950 border-b border-slate-200/60 dark:border-white/10 shadow-sm'
           : 'bg-transparent border-b border-transparent'
       }`}
     >
@@ -141,7 +142,6 @@ export default function Header() {
                 </Link>
               )}
 
-              {/* Desktop Dropdown */}
               {link.dropdown && activeDropdown === 'products' && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-72 bg-white dark:bg-neutral-950 border border-slate-200 dark:border-white/10 rounded-2xl shadow-2xl p-4 mt-2 flex flex-col space-y-1.5 z-50">
                   <div className="pb-2 border-b border-slate-100 dark:border-white/5 mb-1 pl-2 text-left">
@@ -182,7 +182,7 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* Mobile Hamburger Button */}
+        {/* Mobile Buttons */}
         <div className="flex items-center space-x-2 lg:hidden flex-shrink-0">
           <button onClick={() => setShowSearch(!showSearch)} className="p-2 text-slate-500 dark:text-zinc-400">
             <Search className="w-5 h-5" />
@@ -210,44 +210,48 @@ export default function Header() {
         </div>
       )}
 
-      {/* 🟢 PREMIUM MOBILE MENU DRAWER (ACCORDING TOGGLE FIXED) */}
-      {isOpen && (
-        <div className="fixed top-14 left-0 w-full h-[calc(100vh-3.5rem)] bg-white dark:bg-zinc-950 z-40 px-6 py-6 flex flex-col justify-between overflow-y-auto lg:hidden border-t border-slate-100 dark:border-zinc-900/80 shadow-2xl transition-all duration-300">
+      {/* 🟢 SLEEK RIGHT-SIDE DRAWER PANEL INTERACTION ARCHITECTURE */}
+      <div className={`fixed inset-0 z-40 lg:hidden transition-all duration-300 ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}>
+        
+        {/* Transparent Black Dimmer Overlay Backdrop */}
+        <div 
+          onClick={() => setIsOpen(false)}
+          className={`absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`} 
+        />
+
+        {/* 75% Width Sidebar Drawer Content Frame */}
+        <div className={`absolute top-0 right-0 w-[78%] max-w-[320px] h-screen bg-white dark:bg-zinc-950 pt-20 px-5 flex flex-col justify-between shadow-2xl transition-transform duration-300 transform ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           
           <div className="flex flex-col space-y-1 text-left w-full">
             {navLinks.map((link) => (
-              <div key={link.name} className="w-full py-1">
+              <div key={link.name} className="w-full py-0.5">
                 {link.dropdown ? (
                   <div className="w-full">
-                    {/* 🟢 Main Accordion Toggle Button for Products */}
+                    {/* Controlled Accordion Trigger for Products */}
                     <button
                       onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
-                      className={`flex items-center justify-between w-full px-4 py-3 rounded-xl text-base font-bold transition-all ${
+                      className={`flex items-center justify-between w-full px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all ${
                         location.pathname.startsWith('/products')
-                          ? 'bg-sky-50 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400 font-black'
+                          ? 'bg-sky-50 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400 font-extrabold'
                           : 'text-slate-800 dark:text-zinc-200 hover:bg-slate-50 dark:hover:bg-white/[0.02]'
                       }`}
                     >
                       <span>{link.name}</span>
-                      <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${mobileProductsOpen ? 'rotate-180 text-sky-500' : 'opacity-50'}`} />
+                      <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${mobileProductsOpen ? 'rotate-180 text-sky-500' : 'opacity-40'}`} />
                     </button>
 
-                    {/* 🟢 Sub-categories Grid opens ONLY when mobileProductsOpen is true */}
+                    {/* Subcategories open strictly only when clicked */}
                     {mobileProductsOpen && (
-                      <div className="grid grid-cols-2 gap-2.5 px-2 mt-2 transition-all duration-300 animate-in fade-in slide-in-from-top-2">
+                      <div className="grid grid-cols-1 gap-1.5 pl-3 pr-1 mt-1 transition-all">
                         {categories.map((cat) => (
                           <Link
                             key={cat.id}
                             to={`/products/${cat.id}`}
                             onClick={() => setIsOpen(false)}
-                            className="flex flex-col justify-between p-3 rounded-xl bg-slate-50/80 dark:bg-white/[0.02] border border-slate-100/50 dark:border-white/[0.03] active:scale-98 transition-all group"
+                            className="flex items-center justify-between p-2 rounded-lg bg-slate-50/60 dark:bg-white/[0.01] border border-slate-100/40 dark:border-white/[0.02] text-xs font-bold text-slate-600 dark:text-zinc-400 hover:text-sky-500"
                           >
-                            <span className="text-xs font-bold text-slate-700 dark:text-zinc-300 group-hover:text-sky-500">
-                              {cat.name}
-                            </span>
-                            <span className="text-[10px] font-semibold text-sky-500/80 dark:text-sky-400/80 mt-1 inline-flex items-center gap-0.5">
-                              View Items <ArrowRight className="w-3 h-3" />
-                            </span>
+                            <span>{cat.name}</span>
+                            <ArrowRight className="w-3 h-3 opacity-30" />
                           </Link>
                         ))}
                       </div>
@@ -257,40 +261,33 @@ export default function Header() {
                   <Link
                     to={link.path}
                     onClick={() => setIsOpen(false)}
-                    className={`flex items-center justify-between px-4 py-3 rounded-xl text-base font-bold transition-all ${
+                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all ${
                       location.pathname === link.path
-                        ? 'bg-sky-50 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400 font-black'
+                        ? 'bg-sky-50 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400 font-extrabold'
                         : 'text-slate-800 dark:text-zinc-200 hover:bg-slate-50 dark:hover:bg-white/[0.02]'
                     }`}
                   >
                     <span>{link.name}</span>
-                    <ArrowRight className="w-4 h-4 opacity-30" />
                   </Link>
                 )}
               </div>
             ))}
           </div>
 
-          {/* Premium Bottom Utility Theme Dock */}
-          <div className="mt-auto p-4 rounded-2xl bg-slate-50/80 dark:bg-white/[0.02] border border-slate-100 dark:border-white/[0.05] flex items-center justify-between shadow-inner">
-            <div className="flex flex-col text-left">
-              <span className="text-xs font-black text-slate-400 dark:text-zinc-500 uppercase tracking-widest">Interface Theme</span>
-              <span className="text-[11px] font-bold text-slate-700 dark:text-zinc-300 mt-0.5">Light / Dark Mode</span>
-            </div>
+          {/* Bottom Utility Dock */}
+          <div className="mt-auto mb-6 p-3.5 rounded-2xl bg-slate-50/80 dark:bg-white/[0.02] border border-slate-100 dark:border-white/[0.05] flex items-center justify-between shadow-inner">
+            <span className="text-[11px] font-black text-slate-400 dark:text-zinc-500 uppercase tracking-widest">Theme</span>
             <button 
               onClick={toggleTheme} 
-              className="p-2.5 px-4 bg-white dark:bg-zinc-900 rounded-xl border border-slate-200 dark:border-zinc-800 flex items-center gap-2 font-bold text-xs text-slate-700 dark:text-zinc-300 shadow-sm active:scale-95 transition-all"
+              className="p-2 px-3.5 bg-white dark:bg-zinc-900 rounded-xl border border-slate-200 dark:border-zinc-800 flex items-center gap-1.5 font-bold text-xs text-slate-700 dark:text-zinc-300 shadow-sm active:scale-95 transition-all"
             >
-              {theme === 'dark' ? (
-                <><Sun className="w-4 h-4 text-yellow-500" /> Light</>
-              ) : (
-                <><Moon className="w-4 h-4 text-slate-600" /> Dark</>
-              )}
+              {theme === 'dark' ? <><Sun className="w-3.5 h-3.5 text-yellow-500" /> Light</> : <><Moon className="w-3.5 h-3.5 text-slate-600" /> Dark</>}
             </button>
           </div>
 
         </div>
-      )}
+      </div>
+
     </header>
   );
 }
