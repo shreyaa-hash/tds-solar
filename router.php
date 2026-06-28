@@ -1,124 +1,29 @@
 <?php
 // router.php
-// Custom router for PHP built-in web server to run tdssolar replica locally.
+// Custom router for PHP built-in web server to serve the redesigned React build from dist/
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = urldecode($uri);
 
-// 1. Handle static assets (CSS, JS, Fonts, Images, Videos)
-$ext = pathinfo($uri, PATHINFO_EXTENSION);
-$static_extensions = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'webp', 'woff', 'woff2', 'ttf', 'otf', 'ico', 'mp4', 'webm', 'html'];
+// 1. If it's a direct file in the dist/ folder, serve it
+$local_path = __DIR__ . '/dist' . $uri;
 
-if (in_array(strtolower($ext), $static_extensions)) {
-    $basename = basename($uri);
-    
-    // Find where the file is stored locally in css/, js/, fonts/, or images/
-    $local_path = null;
-    
-    // If the request path contains a specific folder hint, check that first
-    if (strpos($uri, 'css/') !== false && file_exists(__DIR__ . '/css/' . $basename)) {
-        $local_path = __DIR__ . '/css/' . $basename;
-    } elseif (strpos($uri, 'js/') !== false && file_exists(__DIR__ . '/js/' . $basename)) {
-        $local_path = __DIR__ . '/js/' . $basename;
-    } elseif (strpos($uri, 'fonts/') !== false) {
-        // Search recursively inside fonts/ for the file
-        $found = glob(__DIR__ . '/fonts/**/' . $basename);
-        if ($found) {
-            $local_path = $found[0];
-        }
-    }
-    
-    // Fallback: search in all folders
-    if (!$local_path) {
-        if (file_exists(__DIR__ . '/css/' . $basename)) {
-            $local_path = __DIR__ . '/css/' . $basename;
-        } elseif (file_exists(__DIR__ . '/js/' . $basename)) {
-            $local_path = __DIR__ . '/js/' . $basename;
-        } elseif (file_exists(__DIR__ . '/images/' . $basename)) {
-            $local_path = __DIR__ . '/images/' . $basename;
-        } else {
-            // Recursive search inside fonts
-            $found = glob(__DIR__ . '/fonts/**/' . $basename);
-            if ($found) {
-                $local_path = $found[0];
-            }
-        }
-    }
-    
-    // If we found the file locally, serve it!
-    if ($local_path && file_exists($local_path)) {
-        serve_file($local_path, $ext);
-        exit;
-    }
-    
-    // If not found locally, proxy from the live site tdssolar.in
-    // We construct the remote URL. Keep the path starting from /Public or whatever is requested.
-    $remote_url = 'https://tdssolar.in' . $uri;
-    
-    // Let's attempt to download the file, cache it locally in images/ (or another folder) and serve it.
-    // This makes sure subsequent requests are super fast!
-    $file_content = @file_get_contents($remote_url);
-    if ($file_content !== false) {
-        // Save locally to cache it
-        $target_dir = __DIR__ . '/images';
-        if (strtolower($ext) === 'css') {
-            $target_dir = __DIR__ . '/css';
-        } elseif (strtolower($ext) === 'js') {
-            $target_dir = __DIR__ . '/js';
-        }
-        
-        // Ensure directory exists
-        if (!is_dir($target_dir)) {
-            mkdir($target_dir, 0777, true);
-        }
-        
-        file_put_contents($target_dir . '/' . $basename, $file_content);
-        
-        // Serve the downloaded content
-        serve_file($target_dir . '/' . $basename, $ext);
-        exit;
-    }
-    
-    // Return 404 if not found anywhere
-    header("HTTP/1.0 404 Not Found");
-    echo "404 Not Found: " . htmlspecialchars($uri);
+if ($uri !== '/' && file_exists($local_path) && !is_dir($local_path)) {
+    $ext = pathinfo($local_path, PATHINFO_EXTENSION);
+    serve_file($local_path, $ext);
     exit;
 }
 
-// 2. Map page requests to PHP files under /php/
-$basename = basename($uri);
-
-// Default to index.php if root or empty basename or index.html
-if ($uri === '/' || $basename === '' || $basename === 'index.php' || $basename === 'index.html') {
-    $php_file = 'index.php';
-} else {
-    // If the request doesn't end with .php, append .php
-    if (pathinfo($basename, PATHINFO_EXTENSION) === '') {
-        $basename .= '.php';
-    }
-    $php_file = $basename;
-}
-
-// Handle spelling mismatch
-if ($php_file === 'microinverter.php') {
-    $php_file = 'microinverteer.php';
-}
-
-$target_php_path = __DIR__ . '/php/' . $php_file;
-
-if (file_exists($target_php_path)) {
-    // Set environment and server variables so the script knows where it is running
-    $_SERVER['SCRIPT_FILENAME'] = $target_php_path;
-    $_SERVER['SCRIPT_NAME'] = '/' . $php_file;
-    
-    // Run the PHP file!
-    require $target_php_path;
+// 2. Fallback: serve dist/index.html for React routing to handle
+$index_path = __DIR__ . '/dist/index.html';
+if (file_exists($index_path)) {
+    serve_file($index_path, 'html');
     exit;
 }
 
-// Return 404 if no PHP file matches
+// 3. Absolute Fallback if dist/index.html doesn't exist
 header("HTTP/1.0 404 Not Found");
-echo "404 Page Not Found: " . htmlspecialchars($uri);
+echo "Redesigned app build not found. Please run 'npm run build' first.";
 exit;
 
 // Helper to serve file with correct headers

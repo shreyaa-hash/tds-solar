@@ -770,7 +770,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             </span>
                         </a>
 
-                        <a href="https://script.google.com/macros/s/AKfycbxgRFjRJ0xlA2Mz585qNuyM2OCtsKzq7cpVF_aZDzbC3jKawe9SDscNtW0Y0uUJbwTysA/exec"
+                        <a href="https://script.google.com/macros/s/AKfycbzGhO4dWlaIwbW35Szfln-gKUIECJ4vruyDRPhW28jZvegt7Lv8UI0Qe6RdX4GaKzeKOA/exec"
                             target="_blank" class="tds-solar-toggle">
                             <div class="tds-toggle-left">
                                 <span class="tds-toggle-icon">

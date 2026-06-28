@@ -1,0 +1,341 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+    color-scheme: light;
+
+    /* Hybrid Design Tokens (Default: Light Theme) */
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F8FAFC;
+    --bg-card: rgba(255, 255, 255, 0.7);
+
+    --accent-primary: #00AEEF;
+    --accent-hover: #38BDF8;
+    --accent-glow: rgba(0, 174, 239, 0.06);
+
+    --text-primary: #0F172A;       /* Dark text for light mode */
+    --text-secondary: #475569;     /* Slate grey text */
+    --text-muted: #64748B;
+
+    --border-color: #E2E8F0;
+    --border-hover: rgba(0, 174, 239, 0.25);
+    
+    /* Extra helper token for overrides */
+    --dynamic-white-to-dark: #FFFFFF; 
+  }
+
+  .dark {
+    color-scheme: dark;
+    --bg-primary: #0A0F1E;
+    --bg-secondary: #0F172A;
+    --bg-card: rgba(15, 23, 42, 0.6);
+    
+    --text-primary: #FFFFFF;       /* White text for dark mode */
+    --text-secondary: #CBD5E1;     /* Light grey text */
+    --text-muted: #94A3B8;
+    
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(0, 174, 239, 0.3);
+    
+    /* Dark mode me isko dark background color de dein */
+    --dynamic-white-to-dark: #0A0F1E; 
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+  }
+  
+  body {
+    @apply bg-background text-primary antialiased overflow-x-hidden;
+    background-color: var(--bg-primary);
+  }
+}
+
+/* Custom Corporate Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 9999px;
+  border: 2px solid var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary);
+}
+
+/* Glassmorphism System - Optimized for Premium Solar-Tech Hybrid Theme */
+.glass-nav {
+  
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 12px 30px 0 rgba(0, 174, 239, 0.05), 0 10px 30px -10px rgba(0, 0, 0, 0.12);
+}
+
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 25px -10px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 12px 30px 0 rgba(0, 174, 239, 0.08), 0 8px 25px -10px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+}
+
+/* SPECULAR SHINE EFFECT (Apple Style) */
+.specular-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.specular-shine::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 45%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 55%
+  );
+  transform: rotate(-45deg);
+  transition: transform 0.5s ease;
+  pointer-events: none;
+}
+
+.specular-shine:hover::after {
+  transform: translate(50%, 50%) rotate(-45deg);
+}
+
+/* Before/After Image Comparison Slider Styles */
+.before-after-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 15px 45px -10px rgba(0, 0, 0, 0.8);
+}
+
+.before-after-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.before-after-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--accent-primary);
+  cursor: ew-resize;
+  z-index: 20;
+}
+
+.before-after-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  border: 3.5px solid var(--bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  box-shadow: 0 4px 15px rgba(0, 174, 239, 0.2);
+  pointer-events: none;
+  font-weight: 900;
+}
+
+/* Tech Blue Ambient Background Blobs */
+.bg-blob-blue, .bg-blob-yellow {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(0, 174, 239, 0.05) 0%, transparent 70%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Animations Keyframes */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(0.3deg); }
+}
+
+@keyframes float-medium {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-5px) rotate(-0.3deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.1; transform: scale(1); filter: blur(40px); }
+  50% { opacity: 0.25; transform: scale(1.1); filter: blur(60px); }
+}
+
+@keyframes sun-rays {
+  0%, 100% { transform: rotate(0deg) scale(1); opacity: 0.03; }
+  50% { transform: rotate(180deg) scale(1.02); opacity: 0.08; }
+}
+
+@keyframes text-shine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* Animation Classes */
+.animate-float-slow {
+  animation: float-slow 12s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float-medium 9s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 15s ease-in-out infinite;
+}
+
+.animate-sun-rays {
+  animation: sun-rays 40s ease-in-out infinite;
+}
+
+.text-gradient-shine {
+  background: linear-gradient(
+    to right,
+    #FFFFFF 20%,
+    #00AEEF 40%,
+    #38BDF8 60%,
+    #FFFFFF 80%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: text-shine 8s linear infinite;
+}
+
+/* Corporate Blue Glow Helpers */
+.glow-yellow, .glow-blue {
+  box-shadow: 0 0 25px rgba(0, 174, 239, 0.08);
+}
+
+.glow-yellow-hover:hover, .glow-blue-hover:hover {
+  box-shadow: 0 0 30px rgba(0, 174, 239, 0.2);
+  border-color: rgba(0, 174, 239, 0.3) !important;
+}
+
+/* 3D Transform Utilities */
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}
+
+/* Google Translate Widget Override */
+.skiptranslate,
+iframe.skiptranslate,
+.goog-te-banner-frame,
+#goog-gt-tt,
+.goog-te-balloon-frame {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
+
+/* Global Tailwind Overrides for Hybrid Theme Compatibility */
+/* Global Tailwind Overrides for Hybrid Theme Compatibility */
+.text-pure-white {
+  color: #FFFFFF !important;
+}
+
+/* Jab light mode ho toh text primary (dark blue) ho, aur dark mode me automatically white ho jaye */
+.text-white {
+  color: var(--text-primary) !important;
+}
+
+.hover\:text-white:hover {
+  color: var(--text-primary) !important;
+}
+
+.hover\:text-pure-white:hover {
+  color: #FFFFFF !important;
+}
+
+.text-zinc-300, .text-zinc-400, .text-slate-400 {
+  color: var(--text-secondary) !important;
+}
+
+.bg-zinc-950, .bg-zinc-900, .bg-zinc-950\/40, .bg-zinc-950\/80, .bg-zinc-950\/95, .bg-zinc-900\/60 {
+  background-color: var(--bg-primary) !important;
+}
+
+@keyframes float-product {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(1deg);
+  }
+}
+
+.animate-float-product {
+  animation: float-product 6s ease-in-out infinite;
+}
