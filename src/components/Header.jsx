@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, ChevronDown, Search, Sun, Moon } from 'lucide-react';
+import { Menu, X, ChevronDown, Search, Sun, Moon, ArrowRight } from 'lucide-react';
 import { categories } from '../data/websiteData';
 
 export default function Header() {
@@ -80,12 +80,11 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 h-14 flex items-center ${
-        isScrolled
-          ? 'bg-white dark:bg-zinc-950 border-b border-slate-200 dark:border-white/10 shadow-sm'
+        isScrolled || isOpen
+          ? 'bg-white/80 dark:bg-zinc-950/80 border-b border-slate-200/60 dark:border-white/10 backdrop-blur-md shadow-sm'
           : 'bg-transparent border-b border-transparent'
       }`}
     >
-      {/* FULL WIDTH DISTRIBUTION ENGINE */}
       <div className="w-full px-6 md:px-12 flex justify-between items-center relative z-50">
         
         {/* Head Logo */}
@@ -103,7 +102,7 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* Desktop Links (Hidden on mobile) */}
+        {/* Desktop Links */}
         <nav className="hidden lg:flex items-center space-x-8 relative">
           {navLinks.map((link) => (
             <div
@@ -137,7 +136,7 @@ export default function Header() {
                 </Link>
               )}
 
-              {/* Desktop Product Dropdown Box */}
+              {/* Desktop Product Dropdown */}
               {link.dropdown && activeDropdown === 'products' && (
                 <div className="absolute top-full left-1/2 -translate-x-1/2 w-72 bg-white dark:bg-neutral-950 border border-slate-200 dark:border-white/10 rounded-2xl shadow-2xl p-4 mt-2 flex flex-col space-y-1.5 z-50">
                   <div className="pb-2 border-b border-slate-100 dark:border-white/5 mb-1 pl-2 text-left">
@@ -178,8 +177,8 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* Mobile Navbar Hamburger Action */}
-        <div className="flex items-center space-x-3 lg:hidden flex-shrink-0">
+        {/* Mobile Hamburger Button */}
+        <div className="flex items-center space-x-2 lg:hidden flex-shrink-0">
           <button onClick={() => setShowSearch(!showSearch)} className="p-2 text-slate-500 dark:text-zinc-400">
             <Search className="w-5 h-5" />
           </button>
@@ -206,58 +205,70 @@ export default function Header() {
         </div>
       )}
 
-      {/* MOBILE OVERLAY DRAWER MENU (HEIGHT & SPACING PERFECTLY SYNCED) */}
+      {/* 🟢 HYPER-PREMIUM APPLE STYLE MOBILE OVERLAY DRAWER */}
       {isOpen && (
-        <div className="fixed top-14 left-0 w-full h-[calc(100vh-3.5rem)] bg-white dark:bg-zinc-950 z-40 px-6 py-8 flex flex-col justify-between overflow-y-auto lg:hidden border-t border-slate-100 dark:border-zinc-900 shadow-2xl transition-transform">
+        <div className="fixed top-14 left-0 w-full h-[calc(100vh-3.5rem)] bg-white/95 dark:bg-zinc-950/95 z-40 px-6 py-6 flex flex-col justify-between overflow-y-auto lg:hidden border-t border-slate-200/50 dark:border-zinc-900/80 shadow-2xl backdrop-blur-xl animate-in fade-in slide-in-from-top-2 duration-300">
           
-          {/* Main Mobile Navigation Trail */}
-          <div className="flex flex-col space-y-5 text-left">
+          {/* Menu Items Matrix */}
+          <div className="flex flex-col space-y-2 text-left">
             {navLinks.map((link) => (
-              <div key={link.name} className="border-b border-slate-100 dark:border-zinc-900 pb-4">
-                <Link
-                  to={link.path}
-                  onClick={() => setIsOpen(false)}
-                  className={`text-xl font-bold block tracking-tight ${
-                    location.pathname === link.path || (link.dropdown && location.pathname.startsWith('/products'))
-                      ? 'text-sky-600 dark:text-sky-400 font-black'
-                      : 'text-slate-800 dark:text-zinc-200'
-                  }`}
-                >
-                  {link.name}
-                </Link>
-
-                {link.dropdown && (
-                  <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 mt-4 pl-2">
-                    {categories.map((cat) => (
-                      <Link
-                        key={cat.id}
-                        to={`/products/${cat.id}`}
-                        onClick={() => setIsOpen(false)}
-                        className="text-xs font-bold text-slate-500 dark:text-zinc-400 hover:text-sky-600 dark:hover:text-sky-400 py-1 flex items-center"
-                      >
-                        <span className="text-sky-400 dark:text-sky-500 mr-1.5">•</span>
-                        {cat.name}
-                      </Link>
-                    ))}
+              <div key={link.name} className="w-full">
+                {link.dropdown ? (
+                  <div className="space-y-2">
+                    <div className="px-3 py-2 text-xs font-black tracking-widest text-sky-600 dark:text-sky-400 uppercase mt-2">
+                      {link.name}
+                    </div>
+                    {/* Compact Grid with Glassmorphism Cards */}
+                    <div className="grid grid-cols-2 gap-2.5 px-2">
+                      {categories.map((cat) => (
+                        <Link
+                          key={cat.id}
+                          to={`/products/${cat.id}`}
+                          onClick={() => setIsOpen(false)}
+                          className="flex flex-col justify-between p-3 rounded-xl bg-slate-50/70 dark:bg-white/[0.02] border border-slate-100 dark:border-white/[0.04] active:scale-98 transition-all group"
+                        >
+                          <span className="text-xs font-bold text-slate-800 dark:text-zinc-200 group-hover:text-sky-500">
+                            {cat.name}
+                          </span>
+                          <span className="text-[9px] font-medium text-slate-400 dark:text-zinc-500 mt-1 inline-flex items-center gap-0.5">
+                            Explore <ArrowRight className="w-2.5 h-2.5" />
+                          </span>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
+                ) : (
+                  <Link
+                    to={link.path}
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center justify-between px-3 py-3 rounded-xl text-base font-bold transition-all active:bg-slate-50 dark:active:bg-white/[0.03] ${
+                      location.pathname === link.path
+                        ? 'bg-sky-50/50 text-sky-600 dark:bg-sky-500/10 dark:text-sky-400 font-black'
+                        : 'text-slate-800 dark:text-zinc-200'
+                    }`}
+                  >
+                    <span>{link.name}</span>
+                    <ChevronDown className="w-4 h-4 -rotate-90 opacity-40" />
+                  </Link>
                 )}
               </div>
             ))}
           </div>
 
-          {/* Theme Switch Utilities at bottom container */}
-          <div className="mt-auto pt-6 border-t border-slate-200 dark:border-zinc-900 flex items-center justify-between bg-white dark:bg-zinc-950 pb-4">
-            <span className="text-xs font-black text-slate-400 dark:text-zinc-500 uppercase tracking-widest">
-              Switch Theme
-            </span>
+          {/* Premium Glassmorphic Bottom Control Bar */}
+          <div className="mt-8 p-4 rounded-2xl bg-slate-50/80 dark:bg-white/[0.02] border border-slate-100 dark:border-white/[0.05] flex items-center justify-between shadow-inner">
+            <div className="flex flex-col text-left">
+              <span className="text-sm font-bold text-slate-800 dark:text-zinc-200">Interface Theme</span>
+              <span className="text-[10px] font-medium text-slate-400 dark:text-zinc-500">Toggle light or dark mode</span>
+            </div>
             <button 
               onClick={toggleTheme} 
-              className="p-2.5 px-4 bg-slate-50 dark:bg-zinc-900 rounded-full border border-slate-200/60 dark:border-zinc-800/60 flex items-center gap-2 font-bold text-xs text-primary shadow-sm active:scale-95 transition-all"
+              className="p-2.5 px-4 bg-white dark:bg-zinc-900 rounded-xl border border-slate-200 dark:border-zinc-800 flex items-center gap-2 font-bold text-xs text-slate-700 dark:text-zinc-300 shadow-sm active:scale-95 transition-all"
             >
               {theme === 'dark' ? (
-                <><Sun className="w-4 h-4 text-yellow-500" /> Light Mode</>
+                <><Sun className="w-4 h-4 text-yellow-500" /> Light</>
               ) : (
-                <><Moon className="w-4 h-4 text-slate-600" /> Dark Mode</>
+                <><Moon className="w-4 h-4 text-slate-600" /> Dark</>
               )}
             </button>
           </div>
