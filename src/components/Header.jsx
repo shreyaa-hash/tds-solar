@@ -85,6 +85,7 @@ export default function Header() {
           : 'bg-transparent border-b border-transparent'
       }`}
     >
+      {/* FULL WIDTH DISTRIBUTION ENGINE */}
       <div className="w-full px-6 md:px-12 flex justify-between items-center relative z-50">
         
         {/* Head Logo */}
@@ -205,18 +206,20 @@ export default function Header() {
         </div>
       )}
 
-      {/* 🟢 BULLETPROOF MOBILE OVERLAY DRAWER MENU */}
+      {/* MOBILE OVERLAY DRAWER MENU (HEIGHT & SPACING PERFECTLY SYNCED) */}
       {isOpen && (
-        <div className="fixed inset-0 top-0 left-0 w-full h-screen bg-white dark:bg-zinc-950 z-40 pt-20 px-6 flex flex-col justify-start overflow-y-auto lg:hidden">
-          <div className="flex flex-col space-y-4 text-left">
+        <div className="fixed top-14 left-0 w-full h-[calc(100vh-3.5rem)] bg-white dark:bg-zinc-950 z-40 px-6 py-8 flex flex-col justify-between overflow-y-auto lg:hidden border-t border-slate-100 dark:border-zinc-900 shadow-2xl transition-transform">
+          
+          {/* Main Mobile Navigation Trail */}
+          <div className="flex flex-col space-y-5 text-left">
             {navLinks.map((link) => (
-              <div key={link.name} className="border-b border-slate-100 dark:border-zinc-900 pb-3">
+              <div key={link.name} className="border-b border-slate-100 dark:border-zinc-900 pb-4">
                 <Link
                   to={link.path}
                   onClick={() => setIsOpen(false)}
-                  className={`text-xl font-black block ${
+                  className={`text-xl font-bold block tracking-tight ${
                     location.pathname === link.path || (link.dropdown && location.pathname.startsWith('/products'))
-                      ? 'text-sky-600 dark:text-sky-400'
+                      ? 'text-sky-600 dark:text-sky-400 font-black'
                       : 'text-slate-800 dark:text-zinc-200'
                   }`}
                 >
@@ -224,15 +227,16 @@ export default function Header() {
                 </Link>
 
                 {link.dropdown && (
-                  <div className="grid grid-cols-2 gap-2 mt-3 pl-2">
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-2.5 mt-4 pl-2">
                     {categories.map((cat) => (
                       <Link
                         key={cat.id}
                         to={`/products/${cat.id}`}
                         onClick={() => setIsOpen(false)}
-                        className="text-xs font-bold text-slate-500 dark:text-zinc-400 hover:text-sky-500 py-1"
+                        className="text-xs font-bold text-slate-500 dark:text-zinc-400 hover:text-sky-600 dark:hover:text-sky-400 py-1 flex items-center"
                       >
-                        • {cat.name}
+                        <span className="text-sky-400 dark:text-sky-500 mr-1.5">•</span>
+                        {cat.name}
                       </Link>
                     ))}
                   </div>
@@ -241,16 +245,23 @@ export default function Header() {
             ))}
           </div>
 
-          {/* Theme Utilities inside Mobile Menu */}
-          <div className="mt-8 pt-6 border-t border-slate-200 dark:border-zinc-900 flex items-center justify-between">
-            <span className="text-sm font-bold text-slate-500 dark:text-zinc-400">Switch Theme</span>
+          {/* Theme Switch Utilities at bottom container */}
+          <div className="mt-auto pt-6 border-t border-slate-200 dark:border-zinc-900 flex items-center justify-between bg-white dark:bg-zinc-950 pb-4">
+            <span className="text-xs font-black text-slate-400 dark:text-zinc-500 uppercase tracking-widest">
+              Switch Theme
+            </span>
             <button 
               onClick={toggleTheme} 
-              className="p-3 bg-slate-100 dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-800 flex items-center gap-2 font-bold text-sm text-primary"
+              className="p-2.5 px-4 bg-slate-50 dark:bg-zinc-900 rounded-full border border-slate-200/60 dark:border-zinc-800/60 flex items-center gap-2 font-bold text-xs text-primary shadow-sm active:scale-95 transition-all"
             >
-              {theme === 'dark' ? <><Sun className="w-5 h-5 text-yellow-500" /> Light</> : <><Moon className="w-5 h-5 text-slate-700" /> Dark</>}
+              {theme === 'dark' ? (
+                <><Sun className="w-4 h-4 text-yellow-500" /> Light Mode</>
+              ) : (
+                <><Moon className="w-4 h-4 text-slate-600" /> Dark Mode</>
+              )}
             </button>
           </div>
+
         </div>
       )}
     </header>
