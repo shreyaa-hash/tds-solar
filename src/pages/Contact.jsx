@@ -113,40 +113,41 @@ export default function Contact() {
 
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 15 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -15 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className="bg-background text-primary pt-24 min-h-screen relative overflow-hidden"
+      className="bg-background text-primary pt-14 min-h-screen relative overflow-hidden"
     >
+      <div className="noise-overlay" />
       
       {/* Background blobs for depth */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-[20%] right-[10%] w-[350px] h-[350px] bg-[radial-gradient(circle,_rgba(0,174,239,0.05)_0%,_transparent_70%)]" />
-        <div className="absolute bottom-[20%] left-[10%] w-[300px] h-[300px] bg-[radial-gradient(circle,_rgba(0,174,239,0.04)_0%,_transparent_70%)]" />
+        <div className="absolute top-[20%] right-[10%] w-[450px] h-[450px] bg-[radial-gradient(circle,_rgba(0,200,255,0.06)_0%,_transparent_70%)] animate-pulse-glow" />
+        <div className="absolute bottom-[20%] left-[10%] w-[400px] h-[400px] bg-[radial-gradient(circle,_rgba(253,184,19,0.04)_0%,_transparent_70%)] animate-pulse-glow" style={{ animationDelay: '2.5s' }} />
       </div>
 
       {/* Banner */}
-      <section className="bg-lightbg border-b border-white/5 py-16 text-center relative overflow-hidden z-10">
-        <div className="absolute inset-0 opacity-20 pointer-events-none">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-secondary/10 via-lightbg to-lightbg" />
+      <section className="relative w-full overflow-hidden bg-slate-50/50 dark:bg-slate-950/20 pt-6 pb-4 text-center border-b border-slate-200 dark:border-white/5 z-10 backdrop-blur-sm mt-0">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
         </div>
-        <div className="relative z-10 max-w-6xl mx-auto px-6 space-y-6">
-          <div className="max-w-4xl mx-auto space-y-4">
-            <span className="font-heading text-xs font-bold text-secondary uppercase tracking-widest block">
+        <div className="relative z-10 max-w-6xl mx-auto px-6 flex flex-col items-center space-y-1">
+          <div className="max-w-4xl mx-auto space-y-1">
+            <span className="font-heading text-xs font-black text-secondary uppercase tracking-widest block">
               Get in Touch
             </span>
-            <h1 className="text-3xl sm:text-5xl font-extrabold text-white">
+            <h1 className="text-2xl sm:text-4xl font-black font-heading text-transparent bg-clip-text bg-gradient-to-b from-slate-900 to-slate-700 dark:from-white dark:to-zinc-400 tracking-tight leading-none">
               Talk to Our Solar Experts
             </h1>
-            <p className="text-zinc-400 max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
+            <p className="text-zinc-450 max-w-xl mx-auto text-sm sm:text-base leading-relaxed font-semibold">
               Schedule a site load analysis survey or ask for customized Waaree solar panel pricing.
             </p>
           </div>
 
-          {/* Action / Toolkit Cards in Banner */}
+          {/* Action Toolkit Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto pt-6">
-            <TiltCard className="glass-panel text-left cursor-pointer hover:border-secondary/35 relative overflow-hidden" maxTilt={5}>
+            <TiltCard className="glass-panel text-left cursor-pointer hover:border-gold/35 relative overflow-hidden border border-white/10" maxTilt={5}>
               <a
                 href="https://script.google.com/macros/s/AKfycbzGhO4dWlaIwbW35Szfln-gKUIECJ4vruyDRPhW28jZvegt7Lv8UI0Qe6RdX4GaKzeKOA/exec"
                 target="_blank"
@@ -154,7 +155,7 @@ export default function Contact() {
                 className="flex items-center justify-between p-6 sm:p-7 w-full group"
               >
                 <div className="flex items-center space-x-5">
-                  <div className="w-12 h-12 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary border border-secondary/20 flex-shrink-0 group-hover:scale-102 transition-transform">
+                  <div className="w-12 h-12 bg-gold/10 rounded-2xl flex items-center justify-center text-gold border border-gold/20 flex-shrink-0 group-hover:scale-105 transition-transform">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-5.5 h-5.5">
                       <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
                       <line x1="9" y1="9" x2="15" y2="9" />
@@ -162,21 +163,21 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-heading text-base font-bold text-white group-hover:text-secondary transition-colors">
+                    <h3 className="font-heading text-base font-black text-white group-hover:text-gold transition-colors">
                       Calculate Your Solar Size
                     </h3>
-                    <p className="text-xs text-zinc-400 mt-1 font-semibold leading-relaxed">
+                    <p className="text-xs text-zinc-450 mt-1 font-semibold leading-relaxed">
                       Estimate required solar system generation capacity.
                     </p>
                   </div>
                 </div>
-                <div className="w-9 h-9 rounded-full bg-white/5 border border-white/10 group-hover:bg-secondary group-hover:text-white flex items-center justify-center text-white transition-all flex-shrink-0">
+                <div className="w-9 h-9 rounded-full bg-white/5 border border-white/10 group-hover:bg-gold group-hover:text-slate-950 flex items-center justify-center text-white transition-all flex-shrink-0">
                   <ArrowRight className="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform" />
                 </div>
               </a>
             </TiltCard>
 
-            <TiltCard className="glass-panel text-left cursor-pointer hover:border-secondary/35 relative overflow-hidden" maxTilt={5}>
+            <TiltCard className="glass-panel text-left cursor-pointer hover:border-secondary/35 relative overflow-hidden border border-white/10" maxTilt={5}>
               <a
                 href="https://script.google.com/macros/s/AKfycbzGhO4dWlaIwbW35Szfln-gKUIECJ4vruyDRPhW28jZvegt7Lv8UI0Qe6RdX4GaKzeKOA/exec"
                 target="_blank"
@@ -184,22 +185,22 @@ export default function Contact() {
                 className="flex items-center justify-between p-6 sm:p-7 w-full group"
               >
                 <div className="flex items-center space-x-5">
-                  <div className="w-12 h-12 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary border border-secondary/20 flex-shrink-0 group-hover:scale-102 transition-transform">
+                  <div className="w-12 h-12 bg-secondary/10 rounded-2xl flex items-center justify-center text-secondary border border-secondary/20 flex-shrink-0 group-hover:scale-105 transition-transform">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="w-5.5 h-5.5">
                       <path d="M12 2L2 7l10 5 10-5-10-5z" />
                       <path d="M2 17l10 5 10-5" />
                     </svg>
                   </div>
                   <div>
-                    <h3 className="font-heading text-base font-bold text-white group-hover:text-secondary transition-colors">
+                    <h3 className="font-heading text-base font-black text-white group-hover:text-secondary transition-colors">
                       Build Your Solar
                     </h3>
-                    <p className="text-xs text-zinc-400 mt-1 font-semibold leading-relaxed">
+                    <p className="text-xs text-zinc-450 mt-1 font-semibold leading-relaxed">
                       Configure your custom solar structures and electrical systems.
                     </p>
                   </div>
                 </div>
-                <div className="w-9 h-9 rounded-full bg-white/5 border border-white/10 group-hover:bg-secondary group-hover:text-white flex items-center justify-center text-white transition-all flex-shrink-0">
+                <div className="w-9 h-9 rounded-full bg-white/5 border border-white/10 group-hover:bg-secondary group-hover:text-slate-950 flex items-center justify-center text-white transition-all flex-shrink-0">
                   <ArrowRight className="w-4 h-4 transform group-hover:translate-x-0.5 transition-transform" />
                 </div>
               </a>
@@ -209,7 +210,7 @@ export default function Contact() {
       </section>
 
       {/* Main Section */}
-      <section className="max-w-7xl mx-auto px-6 py-16 relative z-10">
+      <section className="max-w-7xl mx-auto px-6 py-20 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           
           {/* Left Column: Office Contacts */}
@@ -220,37 +221,37 @@ export default function Contact() {
             className="text-left space-y-8"
           >
             <div className="space-y-4">
-              <h2 className="text-3xl font-extrabold text-white">Office Details</h2>
-              <p className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+              <h2 className="text-3xl font-black font-heading text-white tracking-tight">Office Details</h2>
+              <p className="text-zinc-400 text-sm sm:text-base leading-relaxed font-semibold">
                 Visit our showroom in Fatehpur, Uttar Pradesh, to check mounting structure designs, cable specifications, and hybrid inverters.
               </p>
             </div>
 
             {/* Glassmorphic 3D Globe panel */}
-            <div className="glass-panel rounded-3xl p-6 flex flex-col items-center justify-center relative overflow-hidden h-[290px]">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,174,239,0.05)_0%,_transparent_70%)] pointer-events-none" />
+            <div className="glass-panel rounded-3xl p-6 flex flex-col items-center justify-center relative overflow-hidden h-[290px] border border-white/10 shadow-2xl">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,200,255,0.06)_0%,_transparent_70%)] pointer-events-none" />
               <ThreeDGlobe />
-              <div className="absolute bottom-4 text-[10px] font-bold text-zinc-500 uppercase tracking-widest pointer-events-none">
+              <div className="absolute bottom-4 text-[10px] font-black text-zinc-550 uppercase tracking-widest pointer-events-none">
                 Interactive Energy Network (Drag to rotate)
               </div>
             </div>
 
             <div className="space-y-6">
-              <div className="flex items-start space-x-4 p-6 glass-panel rounded-2xl group shadow-sm">
-                <MapPin className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
+              <div className="flex items-start space-x-4 p-6 glass-panel rounded-2xl group shadow-xl border border-white/10">
+                <MapPin className="w-6 h-6 text-gold flex-shrink-0 mt-1" />
                 <div>
-                  <h4 className="font-bold text-white text-base">TDS Solar Energies</h4>
-                  <p className="text-zinc-400 text-sm mt-1 leading-relaxed">
+                  <h4 className="font-extrabold text-white text-base font-heading">TDS Solar Energies</h4>
+                  <p className="text-zinc-400 text-sm mt-1 leading-relaxed font-semibold">
                     0, VIP ROAD OMKAR NAGAR, FATEHPUR, 212601 U.P.
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4 p-6 glass-panel rounded-2xl group shadow-sm">
-                <Phone className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
+              <div className="flex items-start space-x-4 p-6 glass-panel rounded-2xl group shadow-xl border border-white/10">
+                <Phone className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
                 <div className="space-y-2">
-                  <h4 className="font-bold text-white text-base">Call Support</h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-zinc-400 font-semibold">
+                  <h4 className="font-extrabold text-white text-base font-heading">Call Support</h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-zinc-400 font-bold">
                     <a href="tel:+917800010013" className="hover:text-secondary transition-colors block">
                       +91 78000 10013 <span className="text-[10px] text-zinc-500 font-normal block">B2B & Bulk</span>
                     </a>
@@ -267,11 +268,11 @@ export default function Contact() {
                 </div>
               </div>
 
-              <div className="flex items-start space-x-4 p-6 glass-panel rounded-2xl group shadow-sm">
-                <Mail className="w-6 h-6 text-secondary flex-shrink-0 mt-1" />
+              <div className="flex items-start space-x-4 p-6 glass-panel rounded-2xl group shadow-xl border border-white/10">
+                <Mail className="w-6 h-6 text-gold flex-shrink-0 mt-1" />
                 <div className="space-y-2">
-                  <h4 className="font-bold text-white text-base">Email Inquiries</h4>
-                  <div className="grid grid-cols-1 gap-2 text-sm text-zinc-400 font-semibold break-all">
+                  <h4 className="font-extrabold text-white text-base font-heading">Email Inquiries</h4>
+                  <div className="grid grid-cols-1 gap-2 text-sm text-zinc-400 font-bold break-all">
                     <a href="mailto:tds@tdssolar.in" className="hover:text-secondary transition-colors block">
                       tds@tdssolar.in
                     </a>
@@ -287,22 +288,22 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* Right Column: High-Converting Form */}
+          {/* Right Column: Luxury Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="glass-panel rounded-3xl p-8 text-left relative overflow-hidden shadow-sm"
+            className="glass-panel rounded-3xl p-8 text-left relative overflow-hidden shadow-2xl border border-white/10"
           >
-            <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-secondary to-accent" />
-            <h3 className="font-heading text-xl font-bold text-white mb-6">Send an Inquiry</h3>
+            <div className="absolute top-0 left-0 w-full h-[3px] bg-gradient-to-r from-gold to-secondary" />
+            <h3 className="font-heading text-xl font-black text-white mb-6">Send an Inquiry</h3>
             
             {submitted ? (
               <div className="bg-emerald-950/20 border border-emerald-500/20 p-6 rounded-2xl flex items-start space-x-3 text-emerald-300 animate-in fade-in zoom-in duration-200">
                 <CheckCircle className="w-6 h-6 flex-shrink-0 text-emerald-450 mt-0.5" />
                 <div>
                   <h4 className="font-bold text-base text-emerald-400">Inquiry Sent Successfully!</h4>
-                  <p className="text-xs text-emerald-300/80 mt-1 leading-relaxed">
+                  <p className="text-xs text-emerald-300/80 mt-1 leading-relaxed font-semibold">
                     Our solar engineers will review your inquiry and contact you shortly to schedule a rooftop load analysis.
                   </p>
                 </div>
@@ -311,12 +312,12 @@ export default function Contact() {
               <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Name */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">Full Name</label>
+                  <label className="text-xs font-black text-zinc-400 uppercase tracking-wider block">Full Name</label>
                   <input
                     type="text"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-550 focus:outline-none focus:border-secondary transition-colors"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-secondary transition-colors"
                     placeholder="Enter your name"
                   />
                   {errors.name && (
@@ -329,12 +330,12 @@ export default function Contact() {
 
                 {/* Email */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">Email Address</label>
+                  <label className="text-xs font-black text-zinc-400 uppercase tracking-wider block">Email Address</label>
                   <input
                     type="email"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-550 focus:outline-none focus:border-secondary transition-colors"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-secondary transition-colors"
                     placeholder="name@example.com"
                   />
                   {errors.email && (
@@ -347,12 +348,12 @@ export default function Contact() {
 
                 {/* Phone */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">Phone Number</label>
+                  <label className="text-xs font-black text-zinc-400 uppercase tracking-wider block">Phone Number</label>
                   <input
                     type="text"
                     value={formData.phone}
                     onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-550 focus:outline-none focus:border-secondary transition-colors"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-secondary transition-colors"
                     placeholder="10-digit mobile number"
                   />
                   {errors.phone && (
@@ -365,12 +366,12 @@ export default function Contact() {
 
                 {/* Message */}
                 <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block">Message Details</label>
+                  <label className="text-xs font-black text-zinc-400 uppercase tracking-wider block">Message Details</label>
                   <textarea
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     rows={4}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-550 focus:outline-none focus:border-secondary transition-colors resize-none"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-650 focus:outline-none focus:border-secondary transition-colors resize-none"
                     placeholder="Describe your rooftop area, monthly energy bill, or questions..."
                   />
                   {errors.message && (
@@ -392,10 +393,10 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full font-bold py-3.5 rounded-xl flex items-center justify-center space-x-2 transition-all active:scale-[0.98] shadow-md ${
+                  className={`w-full font-black py-3.5 rounded-xl flex items-center justify-center space-x-2 transition-all active:scale-[0.98] shadow-md uppercase tracking-widest text-xs ${
                     isSubmitting
                       ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed'
-                      : 'bg-secondary text-white hover:bg-secondary/90 hover:scale-[1.01]'
+                      : 'bg-secondary text-slate-950 hover:bg-secondary/90 hover:scale-[1.01]'
                   }`}
                 >
                   {isSubmitting ? (

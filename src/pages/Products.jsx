@@ -59,7 +59,7 @@ export default function Products() {
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="bg-background text-primary pt-20 min-h-screen relative overflow-hidden transition-colors duration-300 w-full"
+      className="bg-background text-primary pt-14 min-h-screen relative overflow-hidden transition-colors duration-300 w-full"
     >
       {/* Background Radial Orbs */}
       <div className="absolute inset-0 pointer-events-none z-0">
@@ -67,14 +67,14 @@ export default function Products() {
       </div>
 
       {/* --- HEADER BANNER --- */}
-      <section className="relative w-full overflow-hidden bg-slate-50/50 dark:bg-slate-950/20 pt-8 pb-6 text-center border-b border-slate-200 dark:border-white/5 z-10 backdrop-blur-sm mt-0">
-        <div className="w-full px-4 md:px-6 flex flex-col items-center space-y-2">
+      <section className="relative w-full overflow-hidden bg-slate-50/50 dark:bg-slate-950/20 pt-6 pb-4 text-center border-b border-slate-200 dark:border-white/5 z-10 backdrop-blur-sm mt-0">
+        <div className="w-full px-4 md:px-6 flex flex-col items-center space-y-1">
           
           {/* Pulsating Badge */}
           <motion.div 
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-sky-100/60 dark:bg-sky-950/50 border border-sky-300/40 dark:border-sky-500/20 shadow-inner scale-90 mb-1"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-sky-100/60 dark:bg-sky-950/50 border border-sky-300/40 dark:border-sky-500/20 shadow-inner scale-90"
           >
             <span className="relative flex h-1.5 w-1.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-500 opacity-75"></span>
@@ -91,7 +91,7 @@ export default function Products() {
               initial={{ opacity: 0, y: "100%" }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="text-3xl sm:text-5xl font-black font-heading text-slate-900 dark:text-white tracking-tight leading-none"
+              className="text-2xl sm:text-4xl font-black font-heading text-slate-900 dark:text-white tracking-tight leading-none"
             >
               High-Performance Solar Materials
             </motion.h1>

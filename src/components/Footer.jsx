@@ -35,10 +35,35 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="dark bg-background text-primary pt-16 pb-8 border-t border-color relative z-10">
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-50">
-        <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-[radial-gradient(circle,_rgba(0,174,239,0.03)_0%,_transparent_75%)]" />
-        <div className="absolute top-0 left-[10%] w-[250px] h-[250px] bg-[radial-gradient(circle,_rgba(0,174,239,0.02)_0%,_transparent_75%)]" />
+    <footer className="dark bg-gradient-to-b from-lightbg to-background text-primary pt-16 pb-8 border-t border-white/5 relative z-10">
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden opacity-30">
+        <div className="absolute bottom-0 right-0 w-[450px] h-[450px] bg-[radial-gradient(circle,_rgba(0,200,255,0.04)_0%,_transparent_70%)]" />
+        <div className="absolute top-0 left-[10%] w-[350px] h-[350px] bg-[radial-gradient(circle,_rgba(253,184,19,0.03)_0%,_transparent_70%)]" />
+      </div>
+
+      {/* Premium Footer CTA Banner */}
+      <div className="max-w-7xl mx-auto px-6 mb-16 relative z-10">
+        <div className="w-full rounded-3xl border border-white/10 bg-gradient-to-r from-lightbg via-background to-lightbg p-8 sm:p-12 flex flex-col md:flex-row md:items-center justify-between text-left gap-8 relative overflow-hidden shadow-2xl">
+          <div className="absolute top-[-50%] right-[-10%] w-96 h-96 bg-secondary/15 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-[-50%] left-[-10%] w-96 h-96 bg-gold/5 rounded-full blur-3xl pointer-events-none" />
+          
+          <div className="space-y-3 max-w-3xl">
+            <h3 className="text-2xl sm:text-3xl font-black font-heading text-white tracking-tight">Ready to Switch to Solar?</h3>
+            <p className="text-xs sm:text-sm text-zinc-400 font-semibold leading-relaxed">
+              Contact our authorized support desk now. Get a complete comprehensive engineering quote and layout visualization for your residence or industrial warehouse.
+            </p>
+          </div>
+
+          <div className="flex-shrink-0">
+            <Link 
+              to="/contact-us"
+              className="inline-flex items-center space-x-2 bg-gold hover:bg-gold/90 text-slate-950 font-black text-xs uppercase tracking-widest px-8 py-4 rounded-xl shadow-xl shadow-gold/20 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <span>Get Free Consultation</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12 relative z-10">
@@ -62,7 +87,7 @@ export default function Footer() {
               href="https://www.facebook.com/people/Tdssolarenergy/61559624085580/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-secondary hover:text-white hover:border-secondary transition-all"
+              className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-secondary hover:text-slate-950 hover:border-secondary hover:shadow-[0_0_15px_rgba(0,200,255,0.4)] transition-all"
             >
               <Facebook className="w-4 h-4" />
             </a>
@@ -70,7 +95,7 @@ export default function Footer() {
               href="https://www.youtube.com/@TDSSOLARPOWER/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-secondary hover:text-white hover:border-secondary transition-all"
+              className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-secondary hover:text-slate-950 hover:border-secondary hover:shadow-[0_0_15px_rgba(0,200,255,0.4)] transition-all"
             >
               <Youtube className="w-4 h-4" />
             </a>
@@ -78,7 +103,7 @@ export default function Footer() {
               href="https://www.instagram.com/tds_solar_energy"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-secondary hover:text-white hover:border-secondary transition-all"
+              className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-secondary hover:text-slate-950 hover:border-secondary hover:shadow-[0_0_15px_rgba(0,200,255,0.4)] transition-all"
             >
               <Instagram className="w-4 h-4" />
             </a>
@@ -86,7 +111,7 @@ export default function Footer() {
               href="https://www.linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-secondary hover:text-white hover:border-secondary transition-all"
+              className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-secondary hover:text-slate-950 hover:border-secondary hover:shadow-[0_0_15px_rgba(0,200,255,0.4)] transition-all"
             >
               <Linkedin className="w-4 h-4" />
             </a>

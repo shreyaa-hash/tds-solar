@@ -18,7 +18,7 @@ export default function Header() {
   const timeoutRef = useRef(null);
 
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('theme') || 'light';
+    return localStorage.getItem('theme') || 'dark';
   });
 
   const toggleTheme = () => {
@@ -85,24 +85,24 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 h-14 flex items-center ${
+      className={`fixed z-50 transition-all duration-500 flex items-center ${
         isScrolled
-          ? 'bg-white dark:bg-zinc-950 border-b border-slate-200/60 dark:border-white/10 shadow-sm'
-          : 'bg-transparent border-b border-transparent'
+          ? 'top-4 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl h-16 rounded-full border border-white/10 shadow-2xl shadow-black/40 glass-nav'
+          : 'top-0 left-0 w-full h-20 border-b border-transparent bg-transparent'
       }`}
     >
       <div className="w-full px-6 md:px-12 flex justify-between items-center relative z-50">
         
         {/* Head Logo */}
         <Link to="/" className="flex items-center space-x-3 group flex-shrink-0">
-          <div className="relative w-8 h-8 bg-slate-100 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/10 flex items-center justify-center">
-            <img src="/images/logo.png" alt="Logo" className="max-w-[80%] max-h-[80%] object-contain" />
+          <div className="relative w-9 h-9 bg-white/5 rounded-xl border border-white/10 flex items-center justify-center transition-all duration-300 group-hover:border-secondary/30 group-hover:scale-105 shadow-inner">
+            <img src="/images/logo.png" alt="Logo" className="max-w-[75%] max-h-[75%] object-contain" />
           </div>
           <div className="text-left leading-none">
-            <span className="font-heading text-base font-black text-slate-900 dark:text-white tracking-wider block">
+            <span className="font-heading text-base font-black text-white tracking-wider block">
               TDS SOLAR
             </span>
-            <span className="text-[8px] text-sky-600 dark:text-sky-400 tracking-widest uppercase block font-bold mt-0.5">
+            <span className="text-[8px] text-secondary tracking-widest uppercase block font-black mt-0.5">
               Energy Solutions
             </span>
           </div>
@@ -120,22 +120,22 @@ export default function Header() {
               {link.dropdown ? (
                 <button 
                   onClick={() => setActiveDropdown(activeDropdown === 'products' ? null : 'products')}
-                  className={`flex items-center text-sm font-semibold transition-colors focus:outline-none relative z-10 ${
+                  className={`flex items-center text-xs font-black uppercase tracking-wider transition-all duration-300 focus:outline-none relative z-10 ${
                     location.pathname.startsWith('/products')
-                      ? 'text-sky-600 dark:text-sky-400 font-bold'
-                      : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
+                      ? 'text-secondary font-black'
+                      : 'text-zinc-300 hover:text-white'
                   }`}
                 >
                   {link.name}
-                  <ChevronDown className={`ml-1 w-4 h-4 transition-transform duration-300 ${activeDropdown === 'products' ? 'rotate-180 text-sky-500' : 'text-slate-400'}`} />
+                  <ChevronDown className={`ml-1 w-3.5 h-3.5 transition-transform duration-300 ${activeDropdown === 'products' ? 'rotate-180 text-secondary' : 'text-zinc-500'}`} />
                 </button>
               ) : (
                 <Link
                   to={link.path}
-                  className={`text-sm font-semibold transition-colors block relative z-10 ${
+                  className={`text-xs font-black uppercase tracking-wider transition-all duration-300 block relative z-10 relative py-1 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:origin-right after:scale-x-0 after:bg-secondary after:transition-transform after:duration-300 hover:after:origin-left hover:after:scale-x-100 ${
                     location.pathname === link.path
-                      ? 'text-sky-600 dark:text-sky-400 font-bold'
-                      : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
+                      ? 'text-secondary font-black'
+                      : 'text-zinc-300 hover:text-white'
                   }`}
                 >
                   {link.name}
@@ -143,9 +143,9 @@ export default function Header() {
               )}
 
               {link.dropdown && activeDropdown === 'products' && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-72 bg-white dark:bg-neutral-950 border border-slate-200 dark:border-white/10 rounded-2xl shadow-2xl p-4 mt-2 flex flex-col space-y-1.5 z-50">
-                  <div className="pb-2 border-b border-slate-100 dark:border-white/5 mb-1 pl-2 text-left">
-                    <span className="font-heading text-[10px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest block">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 w-72 bg-slate-950/95 border border-white/10 rounded-2xl shadow-2xl p-4 mt-2 flex flex-col space-y-1.5 z-50 backdrop-blur-xl">
+                  <div className="pb-2 border-b border-white/5 mb-1 pl-2 text-left">
+                    <span className="font-heading text-[10px] font-black text-secondary uppercase tracking-widest block">
                       Solar Products
                     </span>
                   </div>
@@ -153,12 +153,12 @@ export default function Header() {
                     <Link 
                       key={cat.id} 
                       to={`/products/${cat.id}`} 
-                      className="flex items-center space-x-3 px-3 py-2 rounded-xl hover:bg-slate-50 dark:hover:bg-white/5 transition-all text-left"
+                      className="flex items-center space-x-3 px-3 py-2 rounded-xl hover:bg-white/5 transition-all text-left group/item"
                     >
-                      <div className="w-8 h-8 rounded-lg bg-sky-50 dark:bg-sky-500/10 flex items-center justify-center text-sky-600 border border-slate-100 dark:border-sky-500/20 flex-shrink-0">
+                      <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-secondary border border-white/10 flex-shrink-0 group-hover/item:border-secondary/20">
                         <img src={`/images/${cat.image}`} alt="" className="w-5 h-5 object-contain rounded-md" />
                       </div>
-                      <span className="text-sm font-bold text-slate-700 dark:text-zinc-300 hover:text-sky-600 transition-colors">
+                      <span className="text-sm font-bold text-zinc-300 group-hover/item:text-secondary transition-colors">
                         {cat.name}
                       </span>
                     </Link>
@@ -171,23 +171,27 @@ export default function Header() {
 
         {/* Right Feature Controllers */}
         <div className="hidden lg:flex items-center space-x-4 flex-shrink-0">
-          <button onClick={() => setShowSearch(!showSearch)} className="p-1.5 hover:bg-slate-100 dark:hover:bg-white/5 rounded-full text-slate-500 dark:text-zinc-400 hover:text-sky-600 transition-colors">
+          <button onClick={() => setShowSearch(!showSearch)} className="p-2 hover:bg-white/5 rounded-xl text-zinc-400 hover:text-secondary transition-colors">
             <Search className="w-4 h-4" />
           </button>
-          <button onClick={toggleTheme} className="p-1.5 hover:bg-slate-100 dark:hover:bg-white/5 rounded-full text-slate-500 dark:text-zinc-400 hover:text-sky-600 transition-colors">
+          <button onClick={toggleTheme} className="p-2 hover:bg-white/5 rounded-xl text-zinc-400 hover:text-secondary transition-colors">
             {theme === 'dark' ? <Sun className="w-4 h-4 text-yellow-500" /> : <Moon className="w-4 h-4" />}
           </button>
-          <Link to="/contact-us" className="bg-sky-600 hover:bg-sky-700 dark:bg-sky-500 text-white dark:text-black font-black text-[10px] uppercase tracking-wider px-5 py-2.5 rounded-full transition-all">
-            Contact Us
+          <Link 
+            to="/contact-us" 
+            className="relative group overflow-hidden bg-secondary text-white font-extrabold text-[10px] uppercase tracking-widest px-6 py-3 rounded-full shadow-lg shadow-secondary/20 hover:shadow-secondary/40 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] flex items-center space-x-1"
+          >
+            <span className="relative z-10">Contact Us</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out pointer-events-none" />
           </Link>
         </div>
 
         {/* Mobile Buttons */}
         <div className="flex items-center space-x-2 lg:hidden flex-shrink-0">
-          <button onClick={() => setShowSearch(!showSearch)} className="p-2 text-slate-500 dark:text-zinc-400">
+          <button onClick={() => setShowSearch(!showSearch)} className="p-2 text-zinc-450 hover:text-white">
             <Search className="w-5 h-5" />
           </button>
-          <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-slate-600 dark:text-zinc-400 focus:outline-none relative z-50">
+          <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-zinc-300 hover:text-white focus:outline-none relative z-50">
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
@@ -220,7 +224,7 @@ export default function Header() {
         />
 
         {/* 75% Width Sidebar Drawer Content Frame */}
-        <div className={`absolute top-0 right-0 w-[78%] max-w-[320px] h-screen bg-white dark:bg-zinc-950 pt-20 px-5 flex flex-col justify-between shadow-2xl transition-transform duration-300 transform ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div className={`absolute top-0 right-0 w-[78%] max-w-[320px] h-screen bg-slate-950/95 border-l border-white/10 pt-20 px-5 flex flex-col justify-between shadow-2xl backdrop-blur-xl transition-transform duration-300 transform ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           
           <div className="flex flex-col space-y-1 text-left w-full">
             {navLinks.map((link) => (
@@ -230,14 +234,14 @@ export default function Header() {
                     {/* Controlled Accordion Trigger for Products */}
                     <button
                       onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
-                      className={`flex items-center justify-between w-full px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all ${
+                      className={`flex items-center justify-between w-full px-3.5 py-2.5 rounded-xl text-sm font-black uppercase tracking-wider transition-all ${
                         location.pathname.startsWith('/products')
-                          ? 'bg-sky-50 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400 font-extrabold'
-                          : 'text-slate-800 dark:text-zinc-200 hover:bg-slate-50 dark:hover:bg-white/[0.02]'
+                          ? 'bg-white/5 text-secondary font-extrabold'
+                          : 'text-zinc-300 hover:bg-white/[0.02]'
                       }`}
                     >
                       <span>{link.name}</span>
-                      <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${mobileProductsOpen ? 'rotate-180 text-sky-500' : 'opacity-40'}`} />
+                      <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${mobileProductsOpen ? 'rotate-180 text-secondary' : 'opacity-40'}`} />
                     </button>
 
                     {/* Subcategories open strictly only when clicked */}
@@ -248,7 +252,7 @@ export default function Header() {
                             key={cat.id}
                             to={`/products/${cat.id}`}
                             onClick={() => setIsOpen(false)}
-                            className="flex items-center justify-between p-2 rounded-lg bg-slate-50/60 dark:bg-white/[0.01] border border-slate-100/40 dark:border-white/[0.02] text-xs font-bold text-slate-600 dark:text-zinc-400 hover:text-sky-500"
+                            className="flex items-center justify-between p-2 rounded-lg bg-white/[0.01] border border-white/[0.02] text-xs font-bold text-zinc-400 hover:text-secondary"
                           >
                             <span>{cat.name}</span>
                             <ArrowRight className="w-3 h-3 opacity-30" />
@@ -261,10 +265,10 @@ export default function Header() {
                   <Link
                     to={link.path}
                     onClick={() => setIsOpen(false)}
-                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all ${
+                    className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-black uppercase tracking-wider transition-all ${
                       location.pathname === link.path
-                        ? 'bg-sky-50 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400 font-extrabold'
-                        : 'text-slate-800 dark:text-zinc-200 hover:bg-slate-50 dark:hover:bg-white/[0.02]'
+                        ? 'bg-white/5 text-secondary font-extrabold'
+                        : 'text-zinc-300 hover:bg-white/[0.02]'
                     }`}
                   >
                     <span>{link.name}</span>
@@ -275,13 +279,13 @@ export default function Header() {
           </div>
 
           {/* Bottom Utility Dock */}
-          <div className="mt-auto mb-6 p-3.5 rounded-2xl bg-slate-50/80 dark:bg-white/[0.02] border border-slate-100 dark:border-white/[0.05] flex items-center justify-between shadow-inner">
-            <span className="text-[11px] font-black text-slate-400 dark:text-zinc-500 uppercase tracking-widest">Theme</span>
+          <div className="mt-auto mb-6 p-3.5 rounded-2xl bg-white/[0.02] border border-white/[0.05] flex items-center justify-between shadow-inner">
+            <span className="text-[11px] font-black text-zinc-550 uppercase tracking-widest">Theme</span>
             <button 
               onClick={toggleTheme} 
-              className="p-2 px-3.5 bg-white dark:bg-zinc-900 rounded-xl border border-slate-200 dark:border-zinc-800 flex items-center gap-1.5 font-bold text-xs text-slate-700 dark:text-zinc-300 shadow-sm active:scale-95 transition-all"
+              className="p-2 px-3.5 bg-zinc-900 rounded-xl border border-zinc-800 flex items-center gap-1.5 font-bold text-xs text-zinc-300 shadow-sm active:scale-95 transition-all"
             >
-              {theme === 'dark' ? <><Sun className="w-3.5 h-3.5 text-yellow-500" /> Light</> : <><Moon className="w-3.5 h-3.5 text-slate-600" /> Dark</>}
+              {theme === 'dark' ? <><Sun className="w-3.5 h-3.5 text-yellow-500" /> Light</> : <><Moon className="w-3.5 h-3.5 text-slate-650" /> Dark</>}
             </button>
           </div>
 
