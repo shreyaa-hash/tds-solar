@@ -370,6 +370,41 @@ body {
   color: var(--text-secondary) !important;
 }
 
+/* Bypass overrides inside permanently dark blocks */
+.always-dark-container,
+.always-dark-container * {
+  --text-primary: #FFFFFF !important;
+  --text-secondary: #CBD5E1 !important;
+  --text-muted: #94A3B8 !important;
+}
+
+.always-dark-container .text-white {
+  color: #FFFFFF !important;
+}
+
+.always-dark-container .text-zinc-300 {
+  color: #D4D4D8 !important;
+}
+
+.always-dark-container .text-zinc-400 {
+  color: #A1A1AA !important;
+}
+
+.always-dark-container .text-slate-400 {
+  color: #94A3B8 !important;
+}
+
+.always-dark-container h1,
+.always-dark-container h2,
+.always-dark-container h3,
+.always-dark-container h4 {
+  color: #FFFFFF !important;
+}
+
+.always-dark-container p {
+  color: #CBD5E1 !important;
+}
+
 .bg-zinc-950, .bg-zinc-900, .bg-zinc-950\/40, .bg-zinc-950\/80, .bg-zinc-950\/95, .bg-zinc-900\/60 {
   background-color: var(--bg-primary) !important;
 }
@@ -398,9 +433,9 @@ body {
 
 .section-badge {
   font-family: 'Outfit', sans-serif !important;
-  font-size: 13px !important;
+  font-size: 14px !important;
   font-weight: 800 !important;
-  letter-spacing: 0.18em !important;
+  letter-spacing: 0.2em !important;
   text-transform: uppercase !important;
   color: var(--accent-primary) !important;
   display: inline-block !important;

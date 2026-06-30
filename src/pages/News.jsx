@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Calendar, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { news } from '../data/websiteData';
+import Highlight from '../components/Highlight';
 
 export default function News() {
   return (
@@ -41,7 +42,7 @@ export default function News() {
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="text-2xl sm:text-4xl font-black font-heading text-slate-900 dark:text-white tracking-tight leading-none"
             >
-              Latest News
+              Latest <Highlight color="blue">News</Highlight>
             </motion.h1>
           </div>
           

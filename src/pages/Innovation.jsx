@@ -1,5 +1,6 @@
 import { Cpu, ShieldCheck, Zap, Cog, Settings, Eye } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Highlight from '../components/Highlight';
 
 export default function Innovation() {
   return (
@@ -18,15 +19,14 @@ export default function Innovation() {
           <motion.div 
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-secondary/10 border border-secondary/20 shadow-sm scale-90"
+            className="flex flex-col items-center space-y-1"
           >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-secondary"></span>
+            <span className="bg-secondary/10 border border-secondary/20 shadow-sm text-secondary font-black text-[9px] uppercase tracking-widest px-3 py-1 rounded-full">
+              Innovations
             </span>
-            <span className="text-[10px] font-black text-secondary uppercase tracking-widest">
+            <h1 className="text-2xl sm:text-4xl font-black font-heading text-slate-900 dark:text-white tracking-tight leading-tight mt-0">
               Future Matrix Labs
-            </span>
+            </h1>
           </motion.div>
 
           <div className="overflow-hidden py-0.5">
@@ -34,9 +34,9 @@ export default function Innovation() {
               initial={{ opacity: 0, y: "100%" }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="text-2xl sm:text-4xl font-black font-heading text-transparent bg-clip-text bg-gradient-to-b from-slate-900 to-slate-700 dark:from-white dark:to-zinc-400 tracking-tight leading-none"
+              className="text-2xl sm:text-4xl font-black font-heading text-slate-900 dark:text-white tracking-tight leading-none"
             >
-              Our Innovations
+              Our <Highlight color="blue">Innovations</Highlight>
             </motion.h1>
           </div>
         </div>
@@ -110,7 +110,7 @@ export default function Innovation() {
               Scientific Precision
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight font-heading">
-              Professional R&D Engineers
+              Professional <Highlight color="blue">R&D Engineers</Highlight>
             </h2>
             <p className="text-zinc-400 text-sm leading-relaxed font-semibold">
               We continually upgrade our component standardizations, sourcing premium XLPE tinned-copper wires, copper lightning arrestors, and heavy lip-channels.

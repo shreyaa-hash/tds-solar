@@ -1,5 +1,6 @@
 import { Building, LandPlot, Tractor, Plug, Factory, ShieldCheck, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Highlight from '../components/Highlight';
 
 export default function TdsGroup() {
   const groups = [
@@ -13,62 +14,48 @@ export default function TdsGroup() {
       name: 'TDS CORPORATION',
       icon: Building,
       desc: 'Corporate business operations, enterprise solutions, and consultancies designed for professional, highly structured, and reliable workflows.',
-      image: '/images/tds-corporation-logo.png'
+      image: '/images/tds-corp-logo.png'
     },
     {
-      name: 'TDS INDUSTRIES',
-      icon: Factory,
-      desc: 'Heavy-duty industrial products, manufacturing support, and logistics solutions built with safety, compliance, and long-term trust.',
-      image: '/images/TDS-industries-logo.jpeg'
-    },
-    {
-      name: 'TDS INFRA',
+      name: 'TDS REAL STATE',
       icon: LandPlot,
-      desc: 'Smart infrastructure developments, local government contracting, and engineering project execution for regional growth.',
-      image: '/images/tds-infra-logo.jpeg'
+      desc: 'Real estate advisory, housing, infrastructure, and green building layout consultancies.',
+      image: '/images/tds-real-logo.png'
     },
     {
-      name: 'GRID+',
+      name: 'TDS INFOTECH',
       icon: Plug,
-      desc: 'A growing solar energy brand offering smart grid integrations, power coordinators, and future-ready LFP energy storage systems.',
-      image: '/images/grid.jpeg'
+      desc: 'Software development, solar asset tracking monitors, cloud syncs, and advanced digital integrations.',
+      image: '/images/tds-infotech-logo.png'
     },
     {
-      name: 'GAJ VILAS',
-      icon: ShieldCheck,
-      desc: 'A premium marriage lawn, garden, and event banquet venue designed for elegant weddings, receptions, and memorable celebrations in Fatehpur.',
-      image: '/images/gajvilas-logo.jpeg'
+      name: 'TDS MULTIFRESH RICE MILL',
+      icon: Factory,
+      desc: 'Modern paddy milling facilities operated with high-performance solar generation systems.',
+      image: '/images/tds-mill-logo.png'
     }
   ];
 
   return (
     <div className="bg-background text-primary pt-14 min-h-screen relative overflow-hidden text-left">
+      <div className="noise-overlay" />
       
       {/* Background blobs */}
       <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-[10%] right-[10%] w-[350px] h-[350px] bg-[radial-gradient(circle,_rgba(0,174,239,0.03)_0%,_transparent_75%)]" />
-        <div className="absolute bottom-[20%] left-[5%] w-[300px] h-[300px] bg-[radial-gradient(circle,_rgba(0,174,239,0.02)_0%,_transparent_75%)]" />
+        <div className="absolute top-[20%] right-[10%] w-[450px] h-[450px] bg-[radial-gradient(circle,_rgba(0,174,239,0.05)_0%,_transparent_75%)] animate-pulse-glow" />
+        <div className="absolute bottom-[20%] left-[10%] w-[400px] h-[400px] bg-[radial-gradient(circle,_rgba(0,174,239,0.03)_0%,_transparent_75%)] animate-pulse-glow" style={{ animationDelay: '4s' }} />
       </div>
 
-      {/* Banner */}
       {/* --- ULTRA-COMPACT TDS GROUPS HEADER --- */}
-     {/* --- EXTRA CRUNCHED COMPACT PAGE HEADER --- */}
-      {/* --- EXTRA CRUNCHED COMPACT PAGE HEADER (ZERO GAP FIX) --- */}
       <section className="relative w-full overflow-hidden bg-slate-50/50 dark:bg-slate-950/20 pt-6 pb-4 text-center border-b border-slate-200 dark:border-white/5 z-10 backdrop-blur-sm mt-0">
         <div className="relative z-10 max-w-5xl mx-auto px-6 flex flex-col items-center space-y-1">
-          
-          {/* CRUNCHED ULTRA MINI BADGE */}
           <motion.div 
             initial={{ opacity: 0, y: -4 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-sky-100/60 dark:bg-sky-950/50 border border-sky-300/40 dark:border-sky-500/20 shadow-inner scale-90"
+            className="flex flex-col items-center space-y-1"
           >
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-500 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-sky-500"></span>
-            </span>
-            <span className="text-[10px] font-black text-sky-700 dark:text-sky-400 uppercase tracking-widest">
-              ENTERPRISE DISCOVERY
+            <span className="bg-secondary/10 border border-secondary/20 shadow-sm text-secondary font-black text-[9px] uppercase tracking-widest px-3 py-1 rounded-full">
+              Enterprise Discovery
             </span>
           </motion.div>
 
@@ -80,7 +67,7 @@ export default function TdsGroup() {
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
               className="text-2xl sm:text-4xl font-black font-heading text-slate-900 dark:text-white tracking-tight leading-none"
             >
-              TDS Groups
+              <Highlight color="blue">TDS Groups</Highlight>
             </motion.h1>
           </div>
           

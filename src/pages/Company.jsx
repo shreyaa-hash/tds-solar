@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShieldCheck, Calendar, Trophy, MapPin, Award, CheckCircle } from 'lucide-react';
 import { timeline } from '../data/websiteData';
+import Highlight from '../components/Highlight';
 
 export default function Company() {
   const [selectedYear, setSelectedYear] = useState(timeline[0].year);
@@ -59,9 +60,9 @@ export default function Company() {
               initial={{ opacity: 0, y: "100%" }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              className="text-2xl sm:text-4xl font-black font-heading text-transparent bg-clip-text bg-gradient-to-b from-slate-900 to-slate-700 dark:from-white dark:to-zinc-400 tracking-tight leading-none"
+              className="text-2xl sm:text-4xl font-black font-heading text-slate-900 dark:text-white tracking-tight leading-none"
             >
-              Fatehpur Smart Renewable Energy Solutions
+              Fatehpur <Highlight color="blue">Smart Renewable Energy Solutions</Highlight>
             </motion.h1>
           </div>
         </div>
@@ -127,7 +128,7 @@ export default function Company() {
               Our Journey
             </span>
             <h2 className="text-3xl sm:text-5xl font-black font-heading text-white tracking-tight">
-              TDS Solar Corporate History
+              TDS Solar <Highlight color="blue">Corporate History</Highlight>
             </h2>
             <p className="text-zinc-400 text-sm font-semibold max-w-2xl mx-auto">
               Explore our growth milestone timeline from 2016 startup to full-fledged clean energy provider.
