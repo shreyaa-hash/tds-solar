@@ -83,13 +83,15 @@ export default function Header() {
     { name: 'News', path: '/news' },
   ];
 
+  const isHomepageUnscrolled = location.pathname === '/' && !isScrolled && !activeDropdown;
+
   return (
     <header
       className={`fixed z-50 transition-all duration-500 flex items-center ${
         (isScrolled || activeDropdown)
           ? 'top-4 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl h-16 rounded-full border border-secondary/15 dark:border-white/10 shadow-2xl shadow-secondary/5 dark:shadow-black/40 glass-nav'
           : 'top-0 left-0 w-full h-20 border-b border-transparent bg-transparent'
-      }`}
+      } ${isHomepageUnscrolled ? 'always-dark-container' : ''}`}
     >
       <div className="w-full px-6 md:px-12 flex justify-between items-center relative z-50">
         
