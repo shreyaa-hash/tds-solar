@@ -106,7 +106,7 @@ export default function Innovation() {
         <div className="max-w-7xl mx-auto px-6 text-center space-y-12">
           
           <div className="max-w-2xl mx-auto space-y-4">
-            <span className="font-heading text-xs font-black text-secondary uppercase tracking-widest block">
+            <span className="section-badge mb-2">
               Scientific Precision
             </span>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight font-heading">

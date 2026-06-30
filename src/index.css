@@ -386,3 +386,23 @@ body {
 .animate-float-product {
   animation: float-product 6s ease-in-out infinite;
 }
+
+/* Premium Text Glows and Badges */
+.text-glow-blue {
+  text-shadow: 0 0 20px rgba(0, 174, 239, 0.35), 0 0 40px rgba(0, 174, 239, 0.15);
+}
+
+.text-glow-gold {
+  text-shadow: 0 0 20px rgba(253, 184, 19, 0.35), 0 0 40px rgba(253, 184, 19, 0.15);
+}
+
+.section-badge {
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: var(--accent-primary) !important;
+  display: inline-block !important;
+  text-shadow: 0 0 10px rgba(0, 174, 239, 0.12);
+}

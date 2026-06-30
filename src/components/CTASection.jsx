@@ -12,7 +12,7 @@ export default function CTASection() {
       </div>
 
       <div className="max-w-4xl mx-auto px-6 text-center space-y-8 relative z-10">
-        <span className="text-secondary text-xs font-semibold tracking-widest uppercase block">
+        <span className="section-badge mb-2">
           Begin Your Transition
         </span>
         <h2 className="text-4xl md:text-6xl font-semibold tracking-tight text-white leading-tight">

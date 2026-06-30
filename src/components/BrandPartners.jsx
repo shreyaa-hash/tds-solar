@@ -13,7 +13,7 @@ export default function BrandPartners() {
   return (
     <section className="py-12 md:py-16 max-w-7xl mx-auto px-6">
       <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-        <span className="text-secondary text-xs font-semibold tracking-widest uppercase block">
+        <span className="section-badge mb-2">
           Authorized Supply Chains
         </span>
         <h2 className="text-3xl md:text-5xl font-semibold tracking-tight text-white">

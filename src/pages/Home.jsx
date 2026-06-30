@@ -336,33 +336,50 @@ export default function Home() {
         </section>
 
         {/* ================= SCENE 2: HUGE TYPOGRAPHY EMOTIONAL STORYTELLING ================= */}
-        <section id="storytelling" className="min-h-screen flex items-center justify-center bg-transparent relative z-10 text-center px-6 py-20 border-b border-white/5">
-          <div className="max-w-6xl mx-auto flex flex-col justify-center items-center space-y-6 sm:space-y-8 select-none">
-            {[
-              { text: "THE SUN", style: "text-transparent bg-clip-text bg-gradient-to-r from-gold via-amber-400 to-yellow-500", anim: { scale: [0.95, 1], filter: "blur(0px)" } },
-              { text: "HAS ALWAYS", style: "text-white/40", anim: { y: [15, 0] } },
-              { text: "POWERED", style: "text-white font-bold tracking-wider", anim: { filter: "blur(0px)" } },
-              { text: "THE EARTH", style: "text-transparent bg-clip-text bg-gradient-to-r from-emerald-450 via-teal-400 to-cyan-400", anim: { scale: [0.98, 1] } },
-              { text: "NOW", style: "text-gold font-extrabold text-glow-gold", anim: { scale: [0.9, 1] } },
-              { text: "IT CAN", style: "text-white/40", anim: { y: [-15, 0] } },
-              { text: "POWER", style: "text-white font-black", anim: { filter: "blur(0px)" } },
-              { text: "YOUR HOME", style: "text-secondary text-glow-blue", anim: { scale: [0.96, 1] } }
-            ].map((item, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30, filter: "blur(12px)", scale: 0.9 }}
-                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ 
-                  duration: 0.9, 
-                  delay: idx * 0.1,
-                  ease: [0.16, 1, 0.3, 1]
-                }}
-                 className={`text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black font-heading tracking-tighter leading-none ${item.style}`}
-              >
-                {item.text}
-              </motion.div>
-            ))}
+        <section id="storytelling" className="min-h-screen flex items-center justify-center bg-transparent relative z-10 text-center px-6 py-24 border-b border-white/5">
+          <div className="max-w-5xl mx-auto flex flex-col justify-center items-center space-y-14 select-none text-center">
+            
+            {/* Story Statement 1 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true, margin: "-15%" }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-4"
+            >
+              <h3 className="text-4xl sm:text-6xl lg:text-8xl font-black font-heading tracking-tight leading-tight">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold via-amber-400 to-yellow-500 text-glow-gold">THE SUN</span>
+                <br />
+                <span className="text-slate-900/40 dark:text-white/40 font-medium">has always powered </span>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400">the Earth.</span>
+              </h3>
+            </motion.div>
+
+            {/* Visual spacer dot grid */}
+            <motion.div 
+              initial={{ opacity: 0, scale: 0 }}
+              whileInView={{ opacity: 0.35, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="w-2 h-2 rounded-full bg-gold animate-ping"
+            />
+
+            {/* Story Statement 2 */}
+            <motion.div 
+              initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true, margin: "-15%" }}
+              transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="space-y-4"
+            >
+              <h3 className="text-4xl sm:text-6xl lg:text-8xl font-black font-heading tracking-tight leading-tight">
+                <span className="text-gold font-extrabold text-glow-gold">NOW</span>
+                <br />
+                <span className="text-slate-900/40 dark:text-white/40 font-medium">it can power </span>
+                <span className="text-secondary text-glow-blue">your home.</span>
+              </h3>
+            </motion.div>
+
           </div>
         </section>
       </div>
@@ -450,7 +467,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="text-secondary text-xs font-black tracking-widest uppercase block"
+              className="section-badge"
             >
               Dynamic Architecture
             </motion.span>
@@ -554,7 +571,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="text-secondary text-xs font-black tracking-widest uppercase block"
+              className="section-badge"
             >
               Completed Commissions
             </motion.span>
@@ -627,7 +644,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(0,174,239,0.04)_0%,_transparent_70%)] pointer-events-none" />
         
         <div className="max-w-7xl mx-auto px-6 text-center space-y-4 mb-16">
-          <span className="text-secondary text-xs font-black tracking-widest uppercase block">By The Numbers</span>
+          <span className="section-badge">By The Numbers</span>
           <h2 className="text-3xl sm:text-5xl font-heading font-black text-white">Proven Capacity Autonomy</h2>
         </div>
 
@@ -666,6 +683,147 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ================= SCENE 6.5: GRID+ ECOSYSTEM PRODUCT INTERACTIVE SHOWCASE ================= */}
+      <section className="py-24 bg-gradient-to-b from-background to-lightbg/10 border-b border-white/5 relative z-20 overflow-hidden">
+        {/* Background glow effects */}
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] bg-[radial-gradient(circle,_rgba(0,174,239,0.03)_0%,_transparent_75%)] pointer-events-none blur-3xl" />
+        <div className="absolute top-1/3 right-1/4 -translate-y-1/2 w-[400px] h-[400px] bg-[radial-gradient(circle,_rgba(253,184,19,0.02)_0%,_transparent_75%)] pointer-events-none blur-3xl" />
+
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Header */}
+          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
+            <motion.span 
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="section-badge"
+            >
+              Our Products
+            </motion.span>
+            <h2 className="text-3xl sm:text-5xl font-black font-heading text-slate-900 dark:text-white tracking-tight leading-tight">
+              Reliable Solar Products <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-zinc-400">Designed for </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-secondary to-blue-600 dark:from-secondary dark:to-teal-400">Homes, Businesses, and Industries</span>
+            </h2>
+          </div>
+
+          {/* Interactive Tilt Showcase */}
+          <div className="relative max-w-5xl mx-auto flex flex-col items-center justify-center pt-8">
+            
+            {/* The Main 3D Tilt Card containing the compiled image and hotspots */}
+            <TiltCard 
+              maxTilt={5} 
+              className="relative w-full max-w-4xl rounded-3xl overflow-hidden border border-white/10 bg-white/[0.01] shadow-2xl p-4 sm:p-8 backdrop-blur-sm group flex items-center justify-center"
+            >
+              {/* Specular light flash overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              
+              {/* Glowing background boundary */}
+              <div className="absolute -inset-px rounded-3xl bg-gradient-to-tr from-secondary/10 via-transparent to-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none -z-10" />
+
+              {/* The Product Image Group */}
+              <div className="relative w-full h-auto flex items-center justify-center overflow-hidden rounded-2xl select-none">
+                <img 
+                  src="/images/a1img0202.jpg" 
+                  alt="GRID+ Brand Hardware Ecosystem" 
+                  className="w-full max-w-3xl object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-500 scale-100 group-hover:scale-[1.01] duration-700 ease-out"
+                  loading="lazy"
+                />
+
+                {/* Hotspot 1: LFP Battery Cabinet (Center-left) */}
+                <div className="absolute" style={{ top: "68%", left: "41.5%" }}>
+                  <div className="relative flex items-center justify-center group/hotspot">
+                    <span className="animate-ping absolute inline-flex h-8 w-8 rounded-full bg-secondary opacity-40"></span>
+                    <button className="relative w-4 h-4 rounded-full bg-secondary border border-white flex items-center justify-center shadow-lg cursor-pointer focus:outline-none transition-transform duration-300 group-hover/hotspot:scale-125 z-10" />
+                    
+                    {/* Tooltip Popup */}
+                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-48 sm:w-56 p-3 rounded-xl border border-white/10 bg-slate-950/90 backdrop-blur-md shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/hotspot:opacity-100 group-hover/hotspot:translate-y-0 transition-all duration-300 z-30 text-left">
+                      <h4 className="text-xs font-black text-secondary uppercase tracking-wider">GRID+ LFP Battery Tower</h4>
+                      <p className="text-[10px] text-zinc-400 mt-1 font-semibold leading-relaxed">High-capacity modular storage with 16ms zero-lag power backup.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Hotspot 2: Smart Hybrid Inverter (Right) */}
+                <div className="absolute" style={{ top: "72%", left: "61.5%" }}>
+                  <div className="relative flex items-center justify-center group/hotspot">
+                    <span className="animate-ping absolute inline-flex h-8 w-8 rounded-full bg-secondary opacity-40"></span>
+                    <button className="relative w-4 h-4 rounded-full bg-secondary border border-white flex items-center justify-center shadow-lg cursor-pointer focus:outline-none transition-transform duration-300 group-hover/hotspot:scale-125 z-10" />
+                    
+                    {/* Tooltip Popup */}
+                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-48 sm:w-56 p-3 rounded-xl border border-white/10 bg-slate-950/90 backdrop-blur-md shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/hotspot:opacity-100 group-hover/hotspot:translate-y-0 transition-all duration-300 z-30 text-left">
+                      <h4 className="text-xs font-black text-secondary uppercase tracking-wider">GRID+ Smart Inverter</h4>
+                      <p className="text-[10px] text-zinc-400 mt-1 font-semibold leading-relaxed">Advanced power coordination and net-metering synchronization.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Hotspot 3: EV Charger (Far Left) */}
+                <div className="absolute" style={{ top: "52%", left: "34%" }}>
+                  <div className="relative flex items-center justify-center group/hotspot">
+                    <span className="animate-ping absolute inline-flex h-8 w-8 rounded-full bg-gold opacity-40"></span>
+                    <button className="relative w-4 h-4 rounded-full bg-gold border border-white flex items-center justify-center shadow-lg cursor-pointer focus:outline-none transition-transform duration-300 group-hover/hotspot:scale-125 z-10" />
+                    
+                    {/* Tooltip Popup */}
+                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-48 sm:w-56 p-3 rounded-xl border border-white/10 bg-slate-950/90 backdrop-blur-md shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/hotspot:opacity-100 group-hover/hotspot:translate-y-0 transition-all duration-300 z-30 text-left">
+                      <h4 className="text-xs font-black text-gold uppercase tracking-wider">GRID+ Smart EV Charger</h4>
+                      <p className="text-[10px] text-zinc-400 mt-1 font-semibold leading-relaxed">Fast-charging solar-integrated charger with dynamic load balancing.</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Hotspot 4: Heat Pump Unit (Center-back) */}
+                <div className="absolute" style={{ top: "48%", left: "54%" }}>
+                  <div className="relative flex items-center justify-center group/hotspot">
+                    <span className="animate-ping absolute inline-flex h-8 w-8 rounded-full bg-white opacity-20"></span>
+                    <button className="relative w-4 h-4 rounded-full bg-zinc-650 border border-white flex items-center justify-center shadow-lg cursor-pointer focus:outline-none transition-transform duration-300 group-hover/hotspot:scale-125 z-10" />
+                    
+                    {/* Tooltip Popup */}
+                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-48 sm:w-56 p-3 rounded-xl border border-white/10 bg-slate-950/90 backdrop-blur-md shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/hotspot:opacity-100 group-hover/hotspot:translate-y-0 transition-all duration-300 z-30 text-left">
+                      <h4 className="text-xs font-black text-white uppercase tracking-wider">GRID+ Coordinator</h4>
+                      <p className="text-[10px] text-zinc-400 mt-1 font-semibold leading-relaxed">Eco-friendly high-performance climate control management.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating Stat Badge Left */}
+              <div className="absolute -bottom-6 left-4 sm:left-8 z-20 max-w-[180px] sm:max-w-xs transition-transform duration-500 group-hover:-translate-y-1">
+                <div className="glass-panel p-4 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-md text-left space-y-1">
+                  <div className="flex items-center gap-1.5 text-secondary">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+                    </span>
+                    <span className="text-xl sm:text-2xl font-black font-heading text-glow-blue">2500+</span>
+                  </div>
+                  <p className="text-[9px] sm:text-[10px] text-zinc-400 leading-relaxed font-extrabold uppercase tracking-wide">
+                    Solar Battery Systems Installed in U.P.
+                  </p>
+                </div>
+              </div>
+
+              {/* Floating Stat Badge Right */}
+              <div className="absolute -bottom-6 right-4 sm:right-8 z-20 max-w-[180px] sm:max-w-xs transition-transform duration-500 group-hover:-translate-y-1">
+                <div className="glass-panel p-4 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-md text-left space-y-1">
+                  <div className="flex items-center gap-1.5 text-gold">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
+                    </span>
+                    <span className="text-xl sm:text-2xl font-black font-heading text-glow-gold">3000+</span>
+                  </div>
+                  <p className="text-[9px] sm:text-[10px] text-zinc-400 leading-relaxed font-extrabold uppercase tracking-wide">
+                    PV Inverters Installed in the Last Three Years
+                  </p>
+                </div>
+              </div>
+            </TiltCard>
+            
+          </div>
+        </div>
+      </section>
+
       {/* ================= SCENE 7: PRODUCTS (3D FLOATING GLASSMISM CARDS) ================= */}
       <section className="py-24 bg-lightbg/20 border-b border-white/5 relative z-20">
         <div className="max-w-7xl mx-auto px-6">
@@ -677,7 +835,7 @@ export default function Home() {
               transition={{ type: "spring", stiffness: 50, damping: 12 }}
               className="space-y-3 text-left"
             >
-              <span className="text-secondary text-xs font-black tracking-widest uppercase block">Product Lineup</span>
+              <span className="section-badge">Product Lineup</span>
               <h2 className="text-3xl sm:text-5xl font-black font-heading text-white tracking-tight">Premium Architecture Materials</h2>
             </motion.div>
             <motion.div
@@ -754,7 +912,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="text-secondary text-xs font-black tracking-widest uppercase block"
+              className="section-badge"
             >
               Customer Stories
             </motion.span>
@@ -846,7 +1004,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6">
           
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <span className="text-secondary text-xs font-black tracking-widest uppercase block">Comparative Value</span>
+            <span className="section-badge">Comparative Value</span>
             <h2 className="text-3xl sm:text-5xl font-black font-heading text-white tracking-tight">The Grid Shift Dynamics</h2>
             <p className="text-zinc-400 text-sm font-semibold leading-relaxed">
               Drag the glowing slider horizontally to witness the direct energy transition from high bills to zero grid dependency.
@@ -932,7 +1090,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="text-secondary text-xs font-black tracking-widest uppercase block"
+              className="section-badge"
             >
               Why TDS Solar
             </motion.span>
@@ -1049,7 +1207,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="text-secondary text-xs font-black tracking-widest uppercase block"
+              className="section-badge"
             >
               Support Hub
             </motion.span>
